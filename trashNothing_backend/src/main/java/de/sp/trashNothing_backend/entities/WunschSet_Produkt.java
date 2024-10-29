@@ -26,5 +26,10 @@ public class WunschSet_Produkt {
 
     public WunschSet_Produkt() {
     }
+
+    public WunschSet_Produkt(WunschSet wunschSet, Produkt produkt) {
+        this.wunschSet = wunschSet;
+        this.produkt = produkt;
+    }
 }
 

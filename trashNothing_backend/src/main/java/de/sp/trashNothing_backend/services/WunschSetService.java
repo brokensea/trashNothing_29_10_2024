@@ -1,0 +1,39 @@
+package de.sp.trashNothing_backend.services;
+
+import de.sp.trashNothing_backend.dtos.request.AddProductToWishlistRequestDTO;
+import de.sp.trashNothing_backend.entities.Benutzer;
+import de.sp.trashNothing_backend.entities.Produkt;
+import de.sp.trashNothing_backend.entities.WunschSet_Produkt;
+import de.sp.trashNothing_backend.entities.WunschSet;
+import de.sp.trashNothing_backend.repositories.BenutzerRepository;
+import de.sp.trashNothing_backend.repositories.ProduktRepository;
+import de.sp.trashNothing_backend.repositories.WunschSetRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Set;
+
+public class WunschSetService {
+    @Autowired
+    WunschSetRepository wunschSetRepository;
+    @Autowired
+    BenutzerRepository benutzerRepository;
+    @Autowired
+    ProduktRepository produktRepository;
+
+    public WunschSet createWunschSet(AddProductToWishlistRequestDTO request) {
+        Benutzer benutzer = benutzerRepository.findById(request.benutzerId())
+                .orElseThrow(() -> new IllegalArgumentException("Benutzer nicht gefunden"));
+        Produkt produkt = produktRepository.findById(request.produktId())
+                .orElseThrow(() -> new IllegalArgumentException("Produkt nicht gefunden"));
+
+        WunschSet wunschSet = new WunschSet();
+        wunschSet.setBenutzer(benutzer);
+        wunschSet.setWunschSetProdukte(Set.of(new WunschSet_Produkt(wunschSet, produkt)));
+
+        return wunschSetRepository.save(wunschSet);
+    }
+
+    public void deleteWunschSet(Long id){
+        wunschSetRepository.deleteById(id);
+    }
+}
