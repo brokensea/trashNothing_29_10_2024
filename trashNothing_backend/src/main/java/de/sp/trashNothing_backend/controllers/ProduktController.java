@@ -4,6 +4,7 @@ import de.sp.trashNothing_backend.entities.Produkt;
 import de.sp.trashNothing_backend.services.ProduktService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,8 +18,9 @@ public class ProduktController {
     ProduktService produktService;
 
     @PostMapping
-    public ResponseEntity<createNewProductRequestDto> createProdukt (@Valid @RequestBody createNewProductRequestDto produktDTO){
-
+    public ResponseEntity<Produkt> createProdukt (@Valid @RequestBody Produkt produkt){
+        Produkt createdProdukt = produktService.createProdukt(produkt);
+        return new ResponseEntity<>(createdProdukt , HttpStatus.CREATED);
     }
 
 }
