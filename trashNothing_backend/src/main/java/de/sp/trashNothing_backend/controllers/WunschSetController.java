@@ -3,6 +3,7 @@ package de.sp.trashNothing_backend.controllers;
 import de.sp.trashNothing_backend.dtos.request.AddProductToWishlistRequestDTO;
 import de.sp.trashNothing_backend.dtos.response.WishlistResponseDTO;
 import de.sp.trashNothing_backend.entities.WunschSet;
+import de.sp.trashNothing_backend.repositories.mapper.WunschSetMapper;
 import de.sp.trashNothing_backend.services.WunschSetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,8 +19,8 @@ public class WunschSetController {
     @PostMapping
     public ResponseEntity<WishlistResponseDTO> addToWunschSet(@RequestBody AddProductToWishlistRequestDTO request) {
         WunschSet createdWunschSet = wunschSetService.createWunschSet(request);
-
-        return new ResponseEntity<>(createdWunschSet, HttpStatus.CREATED);
+        WishlistResponseDTO response = WunschSetMapper.toWishlistResponse(createdWunschSet);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
