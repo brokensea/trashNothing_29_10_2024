@@ -1,4 +1,4 @@
-package de.sp.trashNothing_backend.repositories.mapper;
+package de.sp.trashNothing_backend.mapper;
 import de.sp.trashNothing_backend.entities.WunschSet_Produkt;
 import de.sp.trashNothing_backend.entities.Produkt;
 import de.sp.trashNothing_backend.dtos.response.WishlistResponseDTO;

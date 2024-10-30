@@ -1,6 +1,11 @@
 package de.sp.trashNothing_backend.controllers;
 
+import de.sp.trashNothing_backend.dtos.request.ProduktRequestDTO;
+import de.sp.trashNothing_backend.dtos.response.ProduktResponseDTO;
+import de.sp.trashNothing_backend.dtos.response.WishlistResponseDTO;
 import de.sp.trashNothing_backend.entities.Produkt;
+import de.sp.trashNothing_backend.mapper.ProduktMapper;
+import de.sp.trashNothing_backend.mapper.WunschSetMapper;
 import de.sp.trashNothing_backend.services.ProduktService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +23,10 @@ public class ProduktController {
     ProduktService produktService;
 
     @PostMapping
-    public ResponseEntity<Produkt> createProdukt (@Valid @RequestBody Produkt produkt){
-        Produkt createdProdukt = produktService.createProdukt(produkt);
-        return new ResponseEntity<>(createdProdukt , HttpStatus.CREATED);
+    public ResponseEntity<ProduktResponseDTO> createProdukt (@Valid @RequestBody ProduktRequestDTO request){
+        Produkt createdProdukt = produktService.createProdukt(request);
+        ProduktResponseDTO response = ProduktMapper.toProduktResponse(createdProdukt);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
 }
