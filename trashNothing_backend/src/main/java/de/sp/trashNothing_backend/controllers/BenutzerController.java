@@ -17,6 +17,6 @@ public class BenutzerController {
 
     @GetMapping("/soldItems")
     public GetListeVerkaufterProdukteResponseDTO GetListeVerkaufterProdukte(){
-
+        return null;
     }
 }
