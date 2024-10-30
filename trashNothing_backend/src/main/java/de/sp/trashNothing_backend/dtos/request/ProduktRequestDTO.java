@@ -17,5 +17,6 @@ public record ProduktRequestDTO(
         boolean lieferung,
         @Size(max = 1300, message = "Die Bild-URL darf maximal 1300 Zeichen lang sein") String imgUrl,
         @Size(max = 1300, message = "Die Lösch-URL darf maximal 1300 Zeichen lang sein") String deleteUrl,
-        @NotNull(message = "Kategorie darf nicht leer sein") Kategorie kategorie
+        @NotNull(message = "Kategorie darf nicht leer sein") Kategorie kategorie,
+        @NotNull(message = "Benutzer ID darf nicht leer sein") Long benutzerId
 ) {}

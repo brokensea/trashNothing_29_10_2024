@@ -1,6 +1,7 @@
 package de.sp.trashNothing_backend.services;
 
 import de.sp.trashNothing_backend.dtos.request.ProduktRequestDTO;
+import de.sp.trashNothing_backend.entities.Benutzer;
 import de.sp.trashNothing_backend.entities.Produkt;
 import de.sp.trashNothing_backend.mapper.ProduktMapper;
 import de.sp.trashNothing_backend.repositories.ProduktRepository;
@@ -15,8 +16,8 @@ public class ProduktService {
     ProduktRepository produktRepository;
 
 
-    public Produkt createProdukt(@Valid ProduktRequestDTO produktRequestDTO){
-        Produkt produkt = ProduktMapper.toProdukt(produktRequestDTO);
+    public Produkt createProdukt(@Valid ProduktRequestDTO produktRequestDTO, Benutzer benutzer){
+        Produkt produkt = ProduktMapper.toProdukt(produktRequestDTO, benutzer);
         return produktRepository.save(produkt);
     }
 

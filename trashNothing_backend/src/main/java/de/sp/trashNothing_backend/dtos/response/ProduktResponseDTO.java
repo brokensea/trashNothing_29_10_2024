@@ -16,5 +16,6 @@ public record ProduktResponseDTO(
         boolean lieferung,
         String imgUrl,
         String deleteUrl,
-        Kategorie kategorie
+        Kategorie kategorie,
+        Long benutzerId
 ) {}

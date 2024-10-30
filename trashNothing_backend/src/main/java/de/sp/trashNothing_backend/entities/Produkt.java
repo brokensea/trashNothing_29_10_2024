@@ -66,7 +66,7 @@ public class Produkt {
 
     public Produkt() {
     }
-    public Produkt(String titel, String beschreibung, int anzahl, BigDecimal preis, Zustand zustand, String marke, boolean lieferung, String imgUrl, String deleteUrl, Kategorie kategorie) {
+    public Produkt(String titel, String beschreibung, int anzahl, BigDecimal preis, Zustand zustand, String marke, boolean lieferung, String imgUrl, String deleteUrl, Kategorie kategorie, Benutzer benutzer ) {
         this.titel = titel;
         this.beschreibung = beschreibung;
         this.anzahl = anzahl;
@@ -77,5 +77,8 @@ public class Produkt {
         this.imgUrl = imgUrl;
         this.deleteUrl = deleteUrl;
         this.kategorie = kategorie;
+        this.benutzer = benutzer;
     }
+
+
 }

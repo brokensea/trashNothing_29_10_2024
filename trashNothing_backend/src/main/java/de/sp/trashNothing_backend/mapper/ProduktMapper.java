@@ -67,11 +67,12 @@ public class ProduktMapper {
                 produkt.isLieferung(),
                 produkt.getImgUrl(),
                 produkt.getDeleteUrl(),
-                produkt.getKategorie()
+                produkt.getKategorie(),
+                produkt.getBenutzer().getId()
         );
     }
 
-    public static Produkt toProdukt(ProduktRequestDTO request) {
+    public static Produkt toProdukt(ProduktRequestDTO request, Benutzer benutzer) {
         return new Produkt(
                 request.titel(),
                 request.beschreibung(),
@@ -82,7 +83,8 @@ public class ProduktMapper {
                 request.lieferung(),
                 request.imgUrl(),
                 request.deleteUrl(),
-                request.kategorie()
+                request.kategorie(),
+                benutzer
         );
     }
 }

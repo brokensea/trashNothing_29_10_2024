@@ -3,9 +3,11 @@ package de.sp.trashNothing_backend.controllers;
 import de.sp.trashNothing_backend.dtos.request.ProduktRequestDTO;
 import de.sp.trashNothing_backend.dtos.response.ProduktResponseDTO;
 import de.sp.trashNothing_backend.dtos.response.WishlistResponseDTO;
+import de.sp.trashNothing_backend.entities.Benutzer;
 import de.sp.trashNothing_backend.entities.Produkt;
 import de.sp.trashNothing_backend.mapper.ProduktMapper;
 import de.sp.trashNothing_backend.mapper.WunschSetMapper;
+import de.sp.trashNothing_backend.repositories.BenutzerRepository;
 import de.sp.trashNothing_backend.services.ProduktService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
@@ -22,10 +24,14 @@ import static de.sp.trashNothing_backend.mapper.ProduktMapper.toProduktResponse;
 public class ProduktController {
     @Autowired
     ProduktService produktService;
+    @Autowired
+    private BenutzerRepository benutzerRepository;
 
     @PostMapping
     public ResponseEntity<ProduktResponseDTO> createProdukt (@Valid @RequestBody ProduktRequestDTO request){
-        Produkt createdProdukt = produktService.createProdukt(request);
+        Benutzer benutzer = benutzerRepository.findById(request.benutzerId())
+                .orElseThrow(() -> new IllegalArgumentException("User noch nicht gefunden"));
+        Produkt createdProdukt = produktService.createProdukt(request, benutzer);
         ProduktResponseDTO response = toProduktResponse(createdProdukt);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
