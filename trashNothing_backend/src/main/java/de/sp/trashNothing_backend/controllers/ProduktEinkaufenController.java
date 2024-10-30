@@ -23,10 +23,9 @@ public class ProduktEinkaufenController {
     }
 
     @PostMapping("addToShoppinglist")
-    public ResponseEntity<ProduktEinkaufenResponseDTO> createProdukt(
-            @RequestBody ProduktEinkaufenRequestDTO requestDTO,
-            @RequestParam Long benutzerId) {
-        ProduktEinkaufenResponseDTO responseDTO = produktEinkaufenService.kaufenProdukt(requestDTO, benutzerId);
+    public ResponseEntity<ProduktEinkaufenResponseDTO> addProduktToGekauftList(
+            @RequestBody ProduktEinkaufenRequestDTO requestDTO) {
+        ProduktEinkaufenResponseDTO responseDTO = produktEinkaufenService.kaufenProdukt(requestDTO);
         return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
     }
 

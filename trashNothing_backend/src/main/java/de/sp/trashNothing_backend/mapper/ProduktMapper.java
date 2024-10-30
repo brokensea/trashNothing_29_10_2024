@@ -12,21 +12,6 @@ import org.springframework.stereotype.Component;
 public class ProduktMapper {
 
 
-    public static Produkt toProdukt(ProduktEinkaufenRequestDTO requestDTO, Benutzer benutzer) {
-        Produkt produkt = new Produkt();
-        produkt.setTitel(requestDTO.titel());
-        produkt.setBeschreibung(requestDTO.beschreibung());
-        produkt.setAnzahl(requestDTO.anzahl());
-        produkt.setPreis(requestDTO.preis());
-        produkt.setZustand(requestDTO.zustand());
-        produkt.setMarke(requestDTO.marke());
-        produkt.setLieferung(requestDTO.lieferung());
-        produkt.setKategorie(requestDTO.kategorie());
-        produkt.setBenutzer(benutzer);
-        return produkt;
-    }
-
-
     public static ProduktEinkaufenResponseDTO toProduktEinkaufenResponseDTO(Produkt produkt) {
         return new ProduktEinkaufenResponseDTO(
                 produkt.getId(),
@@ -44,16 +29,6 @@ public class ProduktMapper {
         );
     }
 
-    public static void updateProduktFromDTO(ProduktEinkaufenRequestDTO requestDTO, Produkt produkt) {
-        produkt.setTitel(requestDTO.titel());
-        produkt.setBeschreibung(requestDTO.beschreibung());
-        produkt.setAnzahl(requestDTO.anzahl());
-        produkt.setPreis(requestDTO.preis());
-        produkt.setZustand(requestDTO.zustand());
-        produkt.setMarke(requestDTO.marke());
-        produkt.setLieferung(requestDTO.lieferung());
-        produkt.setKategorie(requestDTO.kategorie());
-    }
 
     public static ProduktResponseDTO toProduktResponse(Produkt produkt) {
         return new ProduktResponseDTO(

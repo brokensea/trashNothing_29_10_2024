@@ -8,28 +8,10 @@ import jakarta.validation.constraints.*;
 import java.math.BigDecimal;
 
 public record ProduktEinkaufenRequestDTO(
-        @NotBlank(message = "Titel darf nicht leer sein")
-        String titel,
+        @NotNull(message = "benutzerId darf nicht null sein")
+        Long benutzerId,
 
-        @NotBlank(message = "Beschreibung darf nicht leer sein")
-        @Size(max = 1000, message = "Die Beschreibung darf maximal 1000 Zeichen lang sein")
-        String beschreibung,
-
-        @Min(value = 0, message = "Die Anzahl muss mindestens 0 sein")
-        int anzahl,
-
-        @DecimalMin(value = "0.0", inclusive = false, message = "Der Preis muss größer als 0 sein")
-        BigDecimal preis,
-
-        @NotNull(message = "Zustand darf nicht leer sein")
-        Zustand zustand,
-
-        @NotBlank(message = "Marke darf nicht leer sein")
-        String marke,
-
-        boolean lieferung,
-
-        @NotNull(message = "Kategorie darf nicht leer sein")
-        Kategorie kategorie
+        @NotNull(message = "produkt_id darf nicht null sein")
+        Long produktId
 ) {
 }
