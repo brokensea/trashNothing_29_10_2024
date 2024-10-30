@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/benutzer/{id}/soldItems")
+@RequestMapping("/api/v1/benutzer")
 public class BenutzerController {
     BenutzerService benutzerService;
 
@@ -15,7 +15,7 @@ public class BenutzerController {
         this.benutzerService = benutzerService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/soldItems")
     public GetListeVerkaufterProdukteResponseDTO GetListeVerkaufterProdukte(){
 
     }
