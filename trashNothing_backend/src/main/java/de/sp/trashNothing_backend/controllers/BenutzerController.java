@@ -1,6 +1,7 @@
 package de.sp.trashNothing_backend.controllers;
 
-import de.sp.trashNothing_backend.dtos.response.GetListeVerkaufterProdukteResponseDTO;
+import de.sp.trashNothing_backend.dtos.request.GetAllSoldProductsRequestDto;
+import de.sp.trashNothing_backend.dtos.response.GetAllSoldProductsResponseDto;
 import de.sp.trashNothing_backend.services.BenutzerService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,9 @@ public class BenutzerController {
     }
 
     @GetMapping("/soldItems")
-    public GetListeVerkaufterProdukteResponseDTO GetListeVerkaufterProdukte(){
-        return null;
+
+    public GetAllSoldProductsResponseDto GetListeVerkaufterProdukte(GetAllSoldProductsRequestDto dto){
+        return benutzerService.GetListeverkaufterProdukte(dto.benutzerId());
+
     }
 }

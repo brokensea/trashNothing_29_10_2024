@@ -32,5 +32,4 @@ public class WunschSetController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
 }
