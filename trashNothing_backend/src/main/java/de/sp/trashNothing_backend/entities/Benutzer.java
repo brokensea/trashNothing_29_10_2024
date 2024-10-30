@@ -32,6 +32,7 @@ public class Benutzer implements UserDetails {
 
     @Email(message = "Ungültige E-Mail-Adresse")
     @NotBlank(message = "E-Mail darf nicht leer sein")
+    @Column(unique = true)
     private String email;
 
     @NotBlank(message = "Passwort darf nicht leer sein")
