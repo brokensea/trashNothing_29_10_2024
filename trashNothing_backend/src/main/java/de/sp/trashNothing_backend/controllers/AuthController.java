@@ -3,7 +3,6 @@ package de.sp.trashNothing_backend.controllers;
 import de.sp.trashNothing_backend.dtos.request.AuthRequestDto;
 import de.sp.trashNothing_backend.dtos.response.AuthResponseDto;
 import de.sp.trashNothing_backend.services.AuthentificationService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
