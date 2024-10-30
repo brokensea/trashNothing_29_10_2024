@@ -4,7 +4,7 @@ import de.sp.trashNothing_backend.entities.Produkt;
 
 import java.util.Set;
 
-public record GetListeVerkaufterProdukteResponseDTO(
+public record GetAllSoldProductsResponseDto(
         Set<Produkt> ListeVerkaufterProdukte
 ) {
 }

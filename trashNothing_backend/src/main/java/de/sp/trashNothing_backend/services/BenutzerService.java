@@ -1,6 +1,6 @@
 package de.sp.trashNothing_backend.services;
 
-import de.sp.trashNothing_backend.dtos.response.GetListeVerkaufterProdukteResponseDTO;
+import de.sp.trashNothing_backend.dtos.response.GetAllSoldProductsResponseDto;
 import de.sp.trashNothing_backend.entities.Benutzer;
 import de.sp.trashNothing_backend.repositories.BenutzerRepository;
 
@@ -13,10 +13,10 @@ public class BenutzerService {
         this.benutzerRepository = benutzerRepository;
     }
 
-    public GetListeVerkaufterProdukteResponseDTO GetListeverkaufterProdukte(long benutzerId){
+    public GetAllSoldProductsResponseDto GetListeverkaufterProdukte(long benutzerId){
         Optional<Benutzer> benutzer = benutzerRepository.findById(benutzerId);
         if(benutzer.isEmpty()) throw new IllegalArgumentException("Kein Benutzer mit dieser ID");
-        else{
-            return new GetListeVerkaufterProdukteResponseDTO(benutzer.get().getVerkaufSet());
+        else {
+            return new GetAllSoldProductsResponseDto(benutzer.get().getVerkaufSet());
     }
 }}
