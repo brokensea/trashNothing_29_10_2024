@@ -24,6 +24,7 @@ public class Produkt {
     @NotBlank(message = "Titel darf nicht leer sein")
     private String titel;
 
+    @Column(length = 1000)
     @NotBlank(message = "Beschreibung darf nicht leer sein")
     @Size(max = 1000, message = "Die Beschreibung darf maximal 1000 Zeichen lang sein")
     private String beschreibung;
