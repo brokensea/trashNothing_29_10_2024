@@ -3,7 +3,9 @@ package de.sp.trashNothing_backend.mapper;
 import de.sp.trashNothing_backend.dtos.request.AuthRequestDto;
 import de.sp.trashNothing_backend.dtos.response.AuthResponseDto;
 import de.sp.trashNothing_backend.entities.Benutzer;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AuthMapper {
      public static Benutzer toEntity(AuthRequestDto authRequestDto) {
         if (authRequestDto == null) {

@@ -6,7 +6,9 @@ import de.sp.trashNothing_backend.dtos.response.ProduktEinkaufenResponseDTO;
 import de.sp.trashNothing_backend.dtos.response.ProduktResponseDTO;
 import de.sp.trashNothing_backend.entities.Benutzer;
 import de.sp.trashNothing_backend.entities.Produkt;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ProduktMapper {
 
 

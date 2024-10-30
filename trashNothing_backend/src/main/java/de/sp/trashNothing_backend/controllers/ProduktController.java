@@ -30,28 +30,15 @@ public class ProduktController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-//    @PutMapping("/{id}")
-//    public ResponseEntity<ProduktResponseDTO> updateProdukt (@PathVariable Long id,  @Valid @RequestBody ProduktRequestDTO produktRequestDTO){
-//        try {
-//            Produkt updatedProdukt = new Produkt();
-//
-//            updatedProdukt.setTitel(produktRequestDTO.titel());
-//            updatedProdukt.setBeschreibung(produktRequestDTO.beschreibung());
-//            updatedProdukt.setAnzahl(produktRequestDTO.anzahl());
-//            updatedProdukt.setPreis(produktRequestDTO.preis());
-//            updatedProdukt.setZustand(produktRequestDTO.zustand());
-//            updatedProdukt.setMarke(produktRequestDTO.marke());
-//            updatedProdukt.setLieferung(produktRequestDTO.lieferung());
-//            updatedProdukt.setImgUrl(produktRequestDTO.imgUrl());
-//            updatedProdukt.setDeleteUrl(produktRequestDTO.deleteUrl());
-//            updatedProdukt.setKategorie(produktRequestDTO.kategorie());
-//            Produkt savedProdukt = produktService.updateProdukt(id, updatedProdukt);
-//            ProduktResponseDTO responseDTO = toProduktResponse(savedProdukt);
-//            return ResponseEntity.ok(responseDTO);
-//
-//        } catch (EntityNotFoundException e) {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body();
-//        }
-//    }
+    @PutMapping("/{id}")
+    public ResponseEntity<ProduktResponseDTO> updateProdukt (@PathVariable Long id,  @Valid @RequestBody ProduktRequestDTO produktRequestDTO){
+        try {
+            Produkt updatedProdukt = produktService.updateProdukt(id, produktRequestDTO);
+            ProduktResponseDTO responseDTO = ProduktMapper.toProduktResponse(updatedProdukt);
+            return ResponseEntity.ok(responseDTO);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
 
 }
