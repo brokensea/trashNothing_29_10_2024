@@ -25,7 +25,7 @@ public class ProduktController {
     @Autowired
     ProduktService produktService;
     @Autowired
-    private BenutzerRepository benutzerRepository;
+    BenutzerRepository benutzerRepository;
 
     @PostMapping
     public ResponseEntity<ProduktResponseDTO> createProdukt (@Valid @RequestBody ProduktRequestDTO request){

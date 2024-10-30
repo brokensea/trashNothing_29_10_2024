@@ -23,6 +23,7 @@ public class WunschSetService {
     ProduktRepository produktRepository;
 
     public WunschSet createWunschSet(AddProductToWishlistRequestDTO request) {
+
         Benutzer benutzer = benutzerRepository.findById(request.benutzerId())
                 .orElseThrow(() -> new IllegalArgumentException("Benutzer nicht gefunden"));
         Produkt produkt = produktRepository.findById(request.produktId())
