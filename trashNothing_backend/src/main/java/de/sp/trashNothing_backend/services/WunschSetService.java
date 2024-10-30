@@ -9,9 +9,11 @@ import de.sp.trashNothing_backend.repositories.BenutzerRepository;
 import de.sp.trashNothing_backend.repositories.ProduktRepository;
 import de.sp.trashNothing_backend.repositories.WunschSetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public class WunschSetService {
     @Autowired
     WunschSetRepository wunschSetRepository;

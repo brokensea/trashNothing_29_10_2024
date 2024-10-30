@@ -3,9 +3,11 @@ package de.sp.trashNothing_backend.services;
 import de.sp.trashNothing_backend.dtos.response.GetAllSoldProductsResponseDto;
 import de.sp.trashNothing_backend.entities.Benutzer;
 import de.sp.trashNothing_backend.repositories.BenutzerRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class BenutzerService {
     BenutzerRepository benutzerRepository;
 
