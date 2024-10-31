@@ -13,6 +13,7 @@ public class BenutzerDetailMapper {
                 benutzer.getName(),
                 benutzer.getEmail(),
                 benutzer.getPlz(),
+                benutzer.getOrte(),
                 benutzer.getAddressStrasse(),
                 benutzer.getHandynummer(),
                 benutzer.getVerkaufSet() != null ? benutzer.getVerkaufSet().stream()

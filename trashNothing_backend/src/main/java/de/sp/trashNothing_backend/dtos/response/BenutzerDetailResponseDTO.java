@@ -8,6 +8,7 @@ public record BenutzerDetailResponseDTO(
         String name,
         String email,
         String plz,
+        String ort,
         String addressStrasse,
         String handynummer,
         Set<String> verkaufSet,

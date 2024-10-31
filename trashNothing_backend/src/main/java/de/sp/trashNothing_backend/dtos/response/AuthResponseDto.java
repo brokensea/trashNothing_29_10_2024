@@ -5,6 +5,7 @@ public record AuthResponseDto(
         String name,
         String email,
         String plz,
+        String orte,
         String addressStrasse,
         String handynummer
 ) {
