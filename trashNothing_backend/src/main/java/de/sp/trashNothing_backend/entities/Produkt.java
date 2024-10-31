@@ -79,6 +79,16 @@ public class Produkt {
         this.kategorie = kategorie;
         this.benutzer = benutzer;
     }
-
+    public Produkt(String titel, String beschreibung, int anzahl, BigDecimal preis, Zustand zustand, String marke, boolean lieferung, Kategorie kategorie, Benutzer benutzer ) {
+        this.titel = titel;
+        this.beschreibung = beschreibung;
+        this.anzahl = anzahl;
+        this.preis = preis;
+        this.zustand = zustand;
+        this.marke = marke;
+        this.lieferung = lieferung;
+        this.kategorie = kategorie;
+        this.benutzer = benutzer;
+    }
 
 }
