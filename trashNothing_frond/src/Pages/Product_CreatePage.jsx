@@ -98,11 +98,29 @@ export default function Product_CreatePage() {
         <div className="form-container">
             <form className="form" onSubmit={handleCreateProduct}>
                 <div className="form-group">
-                    <label>Lieferung:</label>
-                    <div>
-                        <label><input type="radio" name="lieferung" value="ja" checked={lieferung} onChange={() => setLieferung(true)} /> Ja</label>
-                        <label><input type="radio" name="lieferung" value="nein" checked={!lieferung} onChange={() => setLieferung(false)} /> Nein</label>
-                    </div>
+                <label>Lieferung:</label>
+                <div className="lieferung-options">
+                    <label>
+                        <input
+                            type="radio"
+                            name="lieferung"
+                            value="ja"
+                            checked={lieferung}
+                            onChange={() => setLieferung(true)}
+                        />{" "}
+                        Ja
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            name="lieferung"
+                            value="nein"
+                            checked={!lieferung}
+                            onChange={() => setLieferung(false)}
+                        />{" "}
+                        Nein
+                    </label>
+                </div>
                 </div>
                 <div className="form-group">
                     <label>Titel der Anzeige:</label>
@@ -142,10 +160,23 @@ export default function Product_CreatePage() {
                         ))}
                     </select>
                 </div>
+                <div className='space_div'></div>
                 <div className="form-group">
-                    <label>PLZ*:</label>
-                    <input type="text" value={plz} onChange={(e) => setPlz(e.target.value)} />
-                    <input type="text" placeholder="Ort" value={ort} onChange={(e) => setOrt(e.target.value)} />
+                <label>PLZ/Ort*:</label>
+                <div className="plz-ort-container">
+                    <input
+                        type="text"
+                        placeholder="PLZ"
+                        value={plz}
+                        onChange={(e) => setPlz(e.target.value)}
+                    />
+                    <input
+                        type="text"
+                        placeholder="Ort"
+                        value={ort}
+                        onChange={(e) => setOrt(e.target.value)}
+                    />
+                </div>
                 </div>
                 
                 <div className="form-group">

@@ -45,6 +45,7 @@ max-width: 500px;
     gap: 15px;
     padding: 0 20px;
     background-color: white;
+    margin-top: 10px;
 }
 .icons_footer{
     display: flex;
