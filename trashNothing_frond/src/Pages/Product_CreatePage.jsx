@@ -1,168 +1,131 @@
 import React, { useState } from 'react';
 
+import './css/Product_CreatePage.css';
+
+const ZUSTAND_ENUM = ["NEU", "WIE_NEU", "GEBRAUCHSSPUREN"]; 
+const KATEGORIE_ENUM = ["KLAMOTTEN", "MÖBEL", " SPIELZEUG"];
 export default function Product_CreatePage() {
+    const [lieferung, setLieferung] = useState(false);
     const [titel, setTitel] = useState('');
     const [beschreibung, setBeschreibung] = useState('');
     const [anzahl, setAnzahl] = useState('');
     const [preis, setPreis] = useState('');
-    const [zustand, setZustand] = useState('');
+    const [zustand, setZustand] = useState(ZUSTAND_ENUM[0]);
     const [marke, setMarke] = useState('');
-    const [lieferung, setLieferung] = useState(false);
-    const [imgUrl, setImgUrl] = useState('');
-    const [deleteUrl, setDeleteUrl] = useState('');
-    const [kategorie, setKategorie] = useState('');
+    const [kategorie, setKategorie] = useState(KATEGORIE_ENUM[0]);
+    const [plz, setPlz] = useState('');
+    const [ort, setOrt] = useState('');
+    const [strasse, setStrasse] = useState('');
+    const [name, setName] = useState('');
+    const [telefonnummer, setTelefonnummer] = useState('');
     const [benutzerId, setBenutzerId] = useState('');
+  
     const handleCreateProduct = async () => {
         const productData = {
+            lieferung,
             titel,
             beschreibung,
-            anzahl,
-            preis: parseFloat(preis),
-            zustand,
             marke,
-            lieferung,
-            imgUrl,
-            deleteUrl,
-            kategorie,
-            benutzerId: parseInt(benutzerId),
-            anzeigentyp
+            anzahl,
+            preis,
+            zustand: zustand.toUpperCase(),
+            kategorie: kategorie.toUpperCase(),
+            plz,
+            ort,
+            strasse,
+            name,
+            telefonnummer,
+            benutzerId
         };
+        console.log("Product data:", productData);
+    
         try {
             const response = await fetch('/api/v1/product', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                 },
                 body: JSON.stringify(productData)
             });
 
             if (response.ok) {
-                alert('Produkt erfolgreich erstellt!');
+                console.log('Produkt erfolgreich erstellt!');
             } else {
-                alert('Fehler beim Erstellen des Produkts.');
+                console.error('Fehler beim Erstellen des Produkts.');
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('Ein Fehler ist aufgetreten.');
         }
     };
-        return (
-            <div className="product-page-container" style={{ backgroundColor: '#FFFFFF', padding: '20px' }}>
-                <h2>Neues Produkt erstellen</h2>
-
-                <div>
-                    <label>Titel</label>
-                    <input
-                        type="text"
-                        value={titel}
-                        onChange={(e) => setTitel(e.target.value)}
-                        placeholder="Title"
-                        className="product-input"
-                    />
+    
+    return (
+        <div className="form-container">
+            <form className="form" onSubmit={handleCreateProduct}>
+                <div className="form-group">
+                    <label>Lieferung:</label>
+                    <div>
+                        <label><input type="radio" name="lieferung" value="ja" checked={lieferung} onChange={() => setLieferung(true)} /> Ja</label>
+                        <label><input type="radio" name="lieferung" value="nein" checked={!lieferung} onChange={() => setLieferung(false)} /> Nein</label>
+                    </div>
                 </div>
-
-                <div>
-                    <label>Beschreibung</label>
-                    <textarea
-                        value={beschreibung}
-                        onChange={(e) => setBeschreibung(e.target.value)}
-                        placeholder="Beschreibung"
-                        className="product-input"
-                    />
+                <div className="form-group">
+                    <label>Titel der Anzeige:</label>
+                    <input type="text" value={titel} onChange={(e) => setTitel(e.target.value)} />
                 </div>
-
-                <div>
-                    <label>Anzahl</label>
-                    <input
-                        type="number"
-                        value={anzahl}
-                        onChange={(e) => setAnzahl(e.target.value)}
-                        placeholder="Anzahl"
-                        className="product-input"
-                    />
+                <div className="form-group">
+                    <label>Beschreibung:</label>
+                    <textarea value={beschreibung} onChange={(e) => setBeschreibung(e.target.value)}></textarea>
                 </div>
-
-                <div>
-                    <label>Preis</label>
-                    <input
-                        type="number"
-                        step="0.01"
-                        value={preis}
-                        onChange={(e) => setPreis(e.target.value)}
-                        placeholder="Preis"
-                        className="product-input"
-                    />
+                <div className="form-group">
+                    <label>Anzahl:</label>
+                    <input type="number" value={anzahl} onChange={(e) => setAnzahl(e.target.value)} />
                 </div>
-
-                <div>
-                    <label>Zustand</label>
-                    <input
-                        type="text"
-                        value={zustand}
-                        onChange={(e) => setZustand(e.target.value)}
-                        placeholder="Zustand"
-                        className="product-input"
-                    />
+                <div className="form-group">
+                    <label>Preis:</label>
+                    <div className="price-input">
+                        <input type="text" value={preis} onChange={(e) => setPreis(e.target.value)} /> EUR
+                    </div>
                 </div>
-
-                <div>
-                    <label>Marke</label>
-                    <input
-                        type="text"
-                        value={marke}
-                        onChange={(e) => setMarke(e.target.value)}
-                        placeholder="Marke"
-                        className="product-input"
-                    />
-                </div>
-
-                <div>
-                    <label>Lieferung</label>
-                    <input
-                        type="checkbox"
-                        checked={lieferung}
-                        onChange={(e) => setLieferung(e.target.checked)}
-                    /> Ja
-                </div>
-
-                <div>
-                    <label>Bild</label>
-                    <input
-                        type="text"
-                        value={imgUrl}
-                        onChange={(e) => setImgUrl(e.target.value)}
-                        placeholder="Bild"
-                        className="product-input"
-                    />
-                </div>
-
-                <div>
-                    <label>Kategorie</label>
-                    <select
-                        value={kategorie}
-                        onChange={(e) => setKategorie(e.target.value)}
-                        className="product-input"
-                    >
-                        <option value="">Wählen Sie eine Kategorie</option>
-                 
-                        <option value="ELEKTRONIK">Elektronik</option>
-                        <option value="MOEBEL">Möbel</option>
-                        <option value="KLEIDUNG">Kleidung</option>
+                <div className="form-group">
+                    <label>Zustand:</label>
+                    <select value={zustand} onChange={(e) => setZustand(e.target.value)}>
+                    {ZUSTAND_ENUM.map((option) => (
+                            <option key={option} value={option}>{option}</option>
+                        ))}
                     </select>
                 </div>
-
-                <div>
-                    <label>Benutzer ID</label>
-                    <input
-                        type="number"
-                        value={benutzerId}
-                        onChange={(e) => setBenutzerId(e.target.value)}
-                        placeholder="Benutzer ID"
-                        className="product-input"
-                    />
+                <div className="form-group">
+                    <label>Marke:</label>
+                    <textarea value={marke} onChange={(e) => setMarke(e.target.value)}></textarea>
                 </div>
-
-                <button onClick={handleCreateProduct} className="create-product-button">
-                    Produkt erstellen
-                </button>
-            </div>
-        );
-    };
+                <div className="form-group">
+                    <label>Kategorie:</label>
+                    <select value={kategorie} onChange={(e) => setKategorie(e.target.value)}>
+                    {KATEGORIE_ENUM.map((option) => (
+                            <option key={option} value={option}>{option}</option>
+                        ))}
+                    </select>
+                </div>
+                <div className="form-group">
+                    <label>PLZ*:</label>
+                    <input type="text" value={plz} onChange={(e) => setPlz(e.target.value)} />
+                    <input type="text" placeholder="Ort" value={ort} onChange={(e) => setOrt(e.target.value)} />
+                </div>
+                <div className="form-group">
+                    <label>Straße/Nr.*:</label>
+                    <input type="text" value={strasse} onChange={(e) => setStrasse(e.target.value)} />
+                </div>
+                <div className="form-group">
+                    <label>Name*:</label>
+                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+                </div>
+                <div className="form-group">
+                    <label>Telefonnummer*:</label>
+                    <input type="text" value={telefonnummer} onChange={(e) => setTelefonnummer(e.target.value)} />
+                </div>
+                <button type="submit" className="submit-button">Produkt einstellen</button>
+            </form>
+        </div>
+    );
+}

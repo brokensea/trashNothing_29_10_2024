@@ -1,3 +1,4 @@
+import { Link, Outlet } from 'react-router-dom';
 export default function Header() {
     return (
         <div>
@@ -10,9 +11,9 @@ export default function Header() {
                     <Link to="/createMatch" className="hover:underline">Spiel erstellen</Link>
                 </nav>
             </header>
-            <main className="p-4">
+            {/* <main className="p-4">
                 <Outlet />
-            </main>
+            </main> */}
         </div>
     );
 }
