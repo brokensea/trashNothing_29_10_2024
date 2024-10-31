@@ -8,7 +8,9 @@
     display: flex;
     justify-content: center;
 }
-
+.form{
+    margin-top: 25px;
+}
 
 h2 {
     text-align: center;

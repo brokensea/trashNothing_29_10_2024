@@ -1,19 +1,25 @@
 import React from 'react';
-import Navigate from '../Components/Navigate';
+import { Outlet, Navigate, useLocation } from 'react-router-dom';
+
 import Header from '../Components/Header';
 import Footer_1 from '../Components/Footer_1';
 import Footer_2 from '../Components/Footer_2';
-import { Outlet } from 'react-router-dom';
-const Layout = () => {
+
+const Layout = () => {  
+    const location = useLocation();
+    const isRegistrationPage = location.pathname === '/registration';
+    const isLoginPage = location.pathname === '/login';
     const token = localStorage.getItem('token');
     return (
         <div>
             <Navigate />
             <Header />
             <main>
-                <Outlet /> 
+            
+                    <Outlet /> 
+          
             </main>
-            {token === null ? <Footer_1 /> : <Footer_2 />}
+            {(isRegistrationPage || isLoginPage || !token == null)? <Footer_2 /> : <Footer_1 />}
         </div>
     );
 };
