@@ -6,6 +6,7 @@ import de.sp.trashNothing_backend.entities.Benutzer;
 import de.sp.trashNothing_backend.entities.GekauftList;
 import de.sp.trashNothing_backend.entities.GekauftSet_Produkt;
 import de.sp.trashNothing_backend.entities.Produkt;
+import de.sp.trashNothing_backend.entities.enumClass.Kategorie;
 import de.sp.trashNothing_backend.mapper.ProduktMapper;
 import de.sp.trashNothing_backend.repositories.BenutzerRepository;
 import de.sp.trashNothing_backend.repositories.GekauftListRepository;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -87,6 +89,44 @@ public class ProduktEinkaufenService {
         // get Produkt from GekauftList
         return gekauftList.getGekauftSetProdukte().stream()
                 .map(GekauftSet_Produkt::getProdukt)
+                .map(ProduktMapper::toProduktEinkaufenResponseDTO)
+                .collect(Collectors.toList());
+    }
+
+
+    public List<ProduktEinkaufenResponseDTO> searchProdukteByTitle(String title) {
+        return produktRepository.findByTitelContainingIgnoreCase(title).stream()
+                .map(ProduktMapper::toProduktEinkaufenResponseDTO)
+                .collect(Collectors.toList());
+    }
+
+
+    public List<ProduktEinkaufenResponseDTO> searchProdukteByKategorie(Kategorie kategorie) {
+        return produktRepository.findByKategorie(kategorie).stream()
+                .map(ProduktMapper::toProduktEinkaufenResponseDTO)
+                .collect(Collectors.toList());
+    }
+
+
+    public List<ProduktEinkaufenResponseDTO> searchProdukteByTitleAndKategorie(String title, Kategorie kategorie) {
+        return produktRepository.searchByTitleAndKategorie(title, kategorie).stream()
+                .map(ProduktMapper::toProduktEinkaufenResponseDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<ProduktEinkaufenResponseDTO> searchProdukteByTitleOderKategorie(String title, Kategorie kategorie) {
+        List<Produkt> produkte;
+        if (title != null && kategorie != null) {
+            produkte = produktRepository.searchByTitleOderKategorie(title, kategorie);
+        } else if (title != null) {
+            produkte = produktRepository.findByTitelContainingIgnoreCase(title);
+        } else if (kategorie != null) {
+            produkte = produktRepository.findByKategorie(kategorie);
+        } else {
+            produkte = produktRepository.findAll();
+        }
+
+        return produkte.stream()
                 .map(ProduktMapper::toProduktEinkaufenResponseDTO)
                 .collect(Collectors.toList());
     }

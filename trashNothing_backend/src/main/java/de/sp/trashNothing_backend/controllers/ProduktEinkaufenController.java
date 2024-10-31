@@ -3,6 +3,7 @@ package de.sp.trashNothing_backend.controllers;
 
 import de.sp.trashNothing_backend.dtos.request.ProduktEinkaufenRequestDTO;
 import de.sp.trashNothing_backend.dtos.response.ProduktEinkaufenResponseDTO;
+import de.sp.trashNothing_backend.entities.enumClass.Kategorie;
 import de.sp.trashNothing_backend.services.ProduktEinkaufenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,11 +35,27 @@ public class ProduktEinkaufenController {
         List<ProduktEinkaufenResponseDTO> responseDTOs = produktEinkaufenService.getAllProdukte();
         return new ResponseEntity<>(responseDTOs, HttpStatus.OK);
     }
-    
+
     @GetMapping("/gekauft/{benutzerId}")
     public ResponseEntity<List<ProduktEinkaufenResponseDTO>> getGekaufteProdukteByBenutzerId(
             @PathVariable Long benutzerId) {
         List<ProduktEinkaufenResponseDTO> responseDTOs = produktEinkaufenService.getGekaufteProdukteByBenutzerId(benutzerId);
         return new ResponseEntity<>(responseDTOs, HttpStatus.OK);
+    }
+
+    @GetMapping("/searchByTitle")
+    public List<ProduktEinkaufenResponseDTO> searchByTitle(@RequestParam String title) {
+        return produktEinkaufenService.searchProdukteByTitle(title);
+    }
+
+    @GetMapping("/searchByKategorie")
+    public List<ProduktEinkaufenResponseDTO> searchByKategorie(@RequestParam Kategorie kategorie) {
+        return produktEinkaufenService.searchProdukteByKategorie(kategorie);
+    }
+
+    @GetMapping("/search")
+    public List<ProduktEinkaufenResponseDTO> searchByTitleOderKategorie(@RequestParam(required = false) String title,
+                                                                        @RequestParam(required = false) Kategorie kategorie) {
+        return produktEinkaufenService.searchProdukteByTitleOderKategorie(title, kategorie);
     }
 }
