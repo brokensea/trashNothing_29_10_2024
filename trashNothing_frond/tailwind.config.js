@@ -5,6 +5,7 @@ export default {
     "./index.html",
     "./src/**/*.{js,jsx,ts,tsx}",
     "./node_modules/daisyui/**/*.js",
+    "./src/pages/css/**/*.css"
   ],
   theme: {
     extend: {},
