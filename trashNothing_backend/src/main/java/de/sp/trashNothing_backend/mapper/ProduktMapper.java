@@ -25,7 +25,7 @@ public class ProduktMapper {
                 produkt.getImgUrl(),
                 produkt.getDeleteUrl(),
                 produkt.getKategorie(),
-                produkt.getBenutzer() != null ? produkt.getBenutzer().getId() : null // 返回关联的 Benutzer ID
+                produkt.getBenutzer() != null ? produkt.getBenutzer().getId() : null // back to Benutzer ID, if not null
         );
     }
 
