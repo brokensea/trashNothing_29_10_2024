@@ -19,7 +19,7 @@ const Layout = () => {
                     <Outlet /> 
           
             </main>
-            {(isRegistrationPage || isLoginPage || !token == null)? <Footer_2 /> : <Footer_1 />}
+            {(isRegistrationPage || isLoginPage || token !== null)? <Footer_2 /> : <Footer_1 />}
         </div>
     );
 };
