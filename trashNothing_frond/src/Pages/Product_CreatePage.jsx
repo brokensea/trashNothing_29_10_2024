@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './css/Product_CreatePage.css';
 
 const ZUSTAND_ENUM = ["NEU", "WIE_NEU", "GEBRAUCHSSPUREN"]; 
 const KATEGORIE_ENUM = ["KLAMOTTEN", "MÖBEL", " SPIELZEUG"];
 export default function Product_CreatePage() {
+    const navigate = useNavigate(); 
     const [lieferung, setLieferung] = useState(false);
     const [titel, setTitel] = useState('');
     const [beschreibung, setBeschreibung] = useState('');
@@ -18,8 +21,36 @@ export default function Product_CreatePage() {
     const [strasse, setStrasse] = useState('');
     const [name, setName] = useState('');
     const [telefonnummer, setTelefonnummer] = useState('');
-    const [benutzerId, setBenutzerId] = useState('');
-  
+    const benutzerId = localStorage.getItem('benutzerId');
+    useEffect(() => {
+        const fetchUserDetails = async () => {
+            try {
+                const response = await fetch(`http://localhost:8080/api/v1/benutzerDetail/${benutzerId}`, {
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                   
+                    setPlz(data.plz);
+                    setOrt(data.ort);
+                    setStrasse(data.strasse);
+                    setName(data.name);
+                    setTelefonnummer(data.telefonnummer);
+                } else {
+                    console.error("Fehler beim Abrufen der Benutzerdaten.");
+                }
+            } catch (error) {
+                console.error("Es ist ein Fehler aufgetreten:", error);
+            }
+        };
+        if (benutzerId) {
+            fetchUserDetails();
+        }
+    }, [benutzerId]);
+
     const handleCreateProduct = async () => {
         const productData = {
             lieferung,
@@ -51,10 +82,14 @@ export default function Product_CreatePage() {
 
             if (response.ok) {
                 console.log('Produkt erfolgreich erstellt!');
+                toast.success("Produkt erfolgreich erstellt!");
+                navigate('/marktplatz');
             } else {
                 console.error('Fehler beim Erstellen des Produkts.');
+                toast.error("Fehler beim Erstellen des Produkts.");
             }
         } catch (error) {
+            toast.error("Es ist ein Fehler aufgetreten.");
             console.error('Error:', error);
         }
     };
@@ -112,6 +147,7 @@ export default function Product_CreatePage() {
                     <input type="text" value={plz} onChange={(e) => setPlz(e.target.value)} />
                     <input type="text" placeholder="Ort" value={ort} onChange={(e) => setOrt(e.target.value)} />
                 </div>
+                
                 <div className="form-group">
                     <label>Straße/Nr.*:</label>
                     <input type="text" value={strasse} onChange={(e) => setStrasse(e.target.value)} />
@@ -125,6 +161,7 @@ export default function Product_CreatePage() {
                     <input type="text" value={telefonnummer} onChange={(e) => setTelefonnummer(e.target.value)} />
                 </div>
                 <button type="submit" className="submit-button">Produkt einstellen</button>
+                <ToastContainer />
             </form>
         </div>
     );
