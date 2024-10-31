@@ -34,4 +34,11 @@ public class ProduktEinkaufenController {
         List<ProduktEinkaufenResponseDTO> responseDTOs = produktEinkaufenService.getAllProdukte();
         return new ResponseEntity<>(responseDTOs, HttpStatus.OK);
     }
+    
+    @GetMapping("/gekauft/{benutzerId}")
+    public ResponseEntity<List<ProduktEinkaufenResponseDTO>> getGekaufteProdukteByBenutzerId(
+            @PathVariable Long benutzerId) {
+        List<ProduktEinkaufenResponseDTO> responseDTOs = produktEinkaufenService.getGekaufteProdukteByBenutzerId(benutzerId);
+        return new ResponseEntity<>(responseDTOs, HttpStatus.OK);
+    }
 }
