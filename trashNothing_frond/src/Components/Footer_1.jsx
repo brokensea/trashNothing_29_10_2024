@@ -5,12 +5,16 @@ import facebook from '../assets/img/icons/facebook.svg';
 import wifi from '../assets/img/icons/wifi.svg';
 import instagram from '../assets/img/icons/instagram.svg';
 export default function Footer_1() { 
+    const navigate = useNavigate(); 
+    const NavigatetoRegisterPage = async ()=>{
+        navigate('/registration'); 
+    }
     return (
         <>
         <footer className='footer_1'>
             <div className='footer_form_1'>
             <h1 className='title_footer'>nothingtotrash - eine online Plattform um Müll zu vermeiden.</h1>
-                <button className='button_footer'>Registriere Dich</button>
+                <button onClick={NavigatetoRegisterPage} className='button_footer'>Registriere Dich</button>
             </div>
         </footer>
         <footer className='footer_2'>
