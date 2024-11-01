@@ -3,11 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './css/Product_CreatePage.css';
+import axios from 'axios';
 
 const ZUSTAND_ENUM = ["NEU", "WIE_NEU", "GEBRAUCHSSPUREN"]; 
 const KATEGORIE_ENUM = ["KLEIDUNG", "MOEBEL", "SPIELZEUG"];
 export default function Product_CreatePage() {
     const navigate = useNavigate(); 
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [previewUrl, setPreviewUrl] = useState(null);
     const [lieferung, setLieferung] = useState(false);
     const [titel, setTitel] = useState('');
     const [beschreibung, setBeschreibung] = useState('');
@@ -21,6 +24,8 @@ export default function Product_CreatePage() {
     const [strasse, setStrasse] = useState('');
     const [name, setName] = useState('');
     const [telefonnummer, setTelefonnummer] = useState('');
+    const [imgUrl, setImgUrl] = useState('');
+
     const benutzerId = localStorage.getItem('benutzerId');
     useEffect(() => {
         const fetchUserDetails = async () => {
@@ -50,24 +55,62 @@ export default function Product_CreatePage() {
             fetchUserDetails();
         }
     }, [benutzerId]);
-
+    
+    const handleImageChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            setSelectedImage(file);
+           
+            setPreviewUrl(URL.createObjectURL(file));
+        }
+    };
     const handleCreateProduct = async (event) => { 
-        event.preventDefault(); 
-        const productData = {
-            lieferung,
-            titel,
-            beschreibung,
-            marke,
-            anzahl: parseInt(anzahl, 10), 
-            preis: parseFloat(preis), 
-            zustand: zustand.trim().toUpperCase(),
-            kategorie: kategorie.trim().toUpperCase(),
-            benutzerId: parseInt(benutzerId, 10)
-        };
-        console.log("Product data:", productData);
+        event.preventDefault();
+    
+        if (!selectedImage) {
+            toast.error("Bitte wählen Sie ein Bild aus.");
+            return;
+        }
+        if (!titel || !beschreibung || !anzahl || !preis || !marke || !kategorie) {
+            toast.error("Bitte füllen Sie alle erforderlichen Felder aus.");
+            return;
+        }
+        if (!anzahl || parseInt(anzahl, 10) <= 0) {
+            toast.error("Bitte geben Sie eine gültige Anzahl ein.");
+            return;
+        }
+    
+        const formData = new FormData();
+        formData.append("file", selectedImage);
     
         try {
-            const response = await fetch('http://localhost:8080/api/v1/product', {
+           
+            const uploadResponse = await axios.post('http://localhost:8080/api/v1/product/withImage', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                }
+            });
+    
+            const imgUrl = uploadResponse.data.imgUrl; // URL, полученный от imgBB
+    
+            const productData = {
+                lieferung,
+                titel,
+                beschreibung,
+                marke,
+                imgUrl,
+                anzahl: parseInt(anzahl, 10), 
+                preis: parseFloat(preis), 
+                zustand: zustand.trim().toUpperCase(),
+                kategorie: kategorie.trim().toUpperCase(),
+                benutzerId: parseInt(benutzerId, 10)
+            };
+    
+            console.log("Product data:", productData);
+            
+        
+            const response = await fetch('http://localhost:8080/api/v1/product/withImage', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -82,7 +125,6 @@ export default function Product_CreatePage() {
                 setTimeout(() => {
                     navigate('/marktplatz');
                 }, 1300); 
-            
             } else {
                 const errorData = await response.json(); 
                 console.error('Fehler beim Erstellen des Produkts:', errorData);
@@ -94,7 +136,6 @@ export default function Product_CreatePage() {
         }
     };
 
-    
     return (
         <div className="form-container">
             <form className="form" onSubmit={handleCreateProduct}>
@@ -149,6 +190,22 @@ export default function Product_CreatePage() {
                         ))}
                     </select>
                 </div>
+                <div>
+            <div className="form-group">
+                <label>Bilder hochladen:</label>
+                <input type="file" accept="image/*" onChange={handleImageChange} />
+          
+            </div>
+            
+            {previewUrl && (
+                <div className="image-preview">
+                    <img src={previewUrl} alt="preview" width="100" height="100" />
+                </div>
+            )}
+            
+            <input type="hidden" value={imgUrl} />
+        </div>
+
                 <div className="form-group">
                     <label>Marke:</label>
                     <textarea value={marke} onChange={(e) => setMarke(e.target.value)}></textarea>
