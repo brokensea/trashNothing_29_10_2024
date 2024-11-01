@@ -2,6 +2,7 @@ package de.sp.trashNothing_backend.services.impl;
 
 import de.sp.trashNothing_backend.dtos.request.AuthRequestDto;
 import de.sp.trashNothing_backend.dtos.response.AuthResponseDto;
+import de.sp.trashNothing_backend.dtos.response.TokenResponseDto;
 import de.sp.trashNothing_backend.entities.Benutzer;
 import de.sp.trashNothing_backend.mapper.AuthMapper;
 import de.sp.trashNothing_backend.repositories.BenutzerRepository;
@@ -33,11 +34,11 @@ public class AuthentificationServiceImpl implements AuthentificationService {
         return AuthMapper.toResponseDto(benutzer);
     }
 
-    public String token(Authentication authentication) {
+    public TokenResponseDto token(Authentication authentication) {
         String token = tokenService.generateToken(authentication);
-        System.out.println("Token erstellt für " + authentication.getName());
-        System.out.println("Token: " + token);
-        Benutzer benutzer = new Benutzer();
-        return token;
+
+        Benutzer benutzer = benutzerRepository.findByEmail(authentication.getName())
+                .orElseThrow(() -> new RuntimeException("Benutzer nicht gefunden"));
+        return new TokenResponseDto(token, benutzer.getId());
     }
 }

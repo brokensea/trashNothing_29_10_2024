@@ -3,9 +3,11 @@ package de.sp.trashNothing_backend.mapper;
 import de.sp.trashNothing_backend.dtos.request.AuthRequestDto;
 import de.sp.trashNothing_backend.dtos.response.AuthResponseDto;
 import de.sp.trashNothing_backend.entities.Benutzer;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AuthMapper {
-     public static Benutzer toEntity(AuthRequestDto authRequestDto) {
+    public static Benutzer toEntity(AuthRequestDto authRequestDto) {
         if (authRequestDto == null) {
             return null;
         }
@@ -14,6 +16,7 @@ public class AuthMapper {
         benutzer.setEmail(authRequestDto.email());
         benutzer.setPassword(authRequestDto.password());
         benutzer.setPlz(authRequestDto.plz());
+        benutzer.setOrte(authRequestDto.orte());
         benutzer.setAddressStrasse(authRequestDto.addressStrasse());
         benutzer.setHandynummer(authRequestDto.handynummer());
         return benutzer;
@@ -28,6 +31,7 @@ public class AuthMapper {
                 benutzer.getName(),
                 benutzer.getEmail(),
                 benutzer.getPlz(),
+                benutzer.getOrte(),
                 benutzer.getAddressStrasse(),
                 benutzer.getHandynummer()
         );

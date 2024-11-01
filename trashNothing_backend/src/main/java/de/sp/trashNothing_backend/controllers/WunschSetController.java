@@ -3,7 +3,7 @@ package de.sp.trashNothing_backend.controllers;
 import de.sp.trashNothing_backend.dtos.request.AddProductToWishlistRequestDTO;
 import de.sp.trashNothing_backend.dtos.response.WishlistResponseDTO;
 import de.sp.trashNothing_backend.entities.WunschSet;
-import de.sp.trashNothing_backend.repositories.mapper.WunschSetMapper;
+import de.sp.trashNothing_backend.mapper.WunschSetMapper;
 import de.sp.trashNothing_backend.services.WunschSetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,5 +32,4 @@ public class WunschSetController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
 }

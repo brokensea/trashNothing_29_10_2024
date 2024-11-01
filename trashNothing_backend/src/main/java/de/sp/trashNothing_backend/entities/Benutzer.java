@@ -43,6 +43,9 @@ public class Benutzer implements UserDetails {
     @Pattern(regexp = "\\d{5}", message = "PLZ muss aus 5 Ziffern bestehen")
     private String plz;
 
+    @NotBlank(message = "Orte darf nicht leer sein")
+    private String orte;
+
     @NotBlank(message = "Straße darf nicht leer sein")
     private String addressStrasse;
 
@@ -55,12 +58,11 @@ public class Benutzer implements UserDetails {
     @OneToMany(mappedBy = "benutzer", cascade = CascadeType.ALL)
     private Set<WunschSet> wunschSet;
 
-    @OneToMany(mappedBy = "benutzer" , cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "benutzer", cascade = CascadeType.ALL)
     private List<GekauftList> gekauftSet;
 
     public Benutzer() {
     }
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -71,6 +73,6 @@ public class Benutzer implements UserDetails {
 
     @Override
     public String getUsername() {
-         return email;
+        return email;
     }
 }

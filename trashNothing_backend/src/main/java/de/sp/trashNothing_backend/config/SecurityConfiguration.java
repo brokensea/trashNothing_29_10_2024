@@ -41,6 +41,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(csrf -> csrf.disable())
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(request -> request
                         .requestMatchers(HttpMethod.POST, "/api/v1/auth/signup").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/auth/signin").permitAll()
@@ -89,7 +90,6 @@ public class SecurityConfiguration {
         configuration.setAllowedOrigins(List.of("*"));
         configuration.setAllowedMethods(List.of("GET", "POST", "DELETE", "PUT"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
-
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
