@@ -80,11 +80,21 @@ export default function Product_CreatePage() {
             return;
         }
     
+        // Здесь объявляем FormData
         const formData = new FormData();
-        formData.append("file", selectedImage);
+        formData.append("imgUrl", selectedImage);
+        formData.append("lieferung", lieferung);
+        formData.append("titel", titel);
+        formData.append("beschreibung", beschreibung);
+        formData.append("marke", marke);
+        formData.append("anzahl", parseInt(anzahl, 10));
+        formData.append("preis", parseFloat(preis));
+        formData.append("zustand", zustand.trim().toUpperCase());
+        formData.append("kategorie", kategorie.trim().toUpperCase());
+        formData.append("benutzerId", parseInt(benutzerId, 10));
     
         try {
-           
+            // Отправка данных на сервер
             const uploadResponse = await axios.post('http://localhost:8080/api/v1/product/withImage', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
@@ -92,50 +102,21 @@ export default function Product_CreatePage() {
                 }
             });
     
-            const imgUrl = uploadResponse.data.imgUrl; // URL, полученный от imgBB
-    
-            const productData = {
-                lieferung,
-                titel,
-                beschreibung,
-                marke,
-                imgUrl,
-                anzahl: parseInt(anzahl, 10), 
-                preis: parseFloat(preis), 
-                zustand: zustand.trim().toUpperCase(),
-                kategorie: kategorie.trim().toUpperCase(),
-                benutzerId: parseInt(benutzerId, 10)
-            };
-    
-            console.log("Product data:", productData);
-            
-        
-            const response = await fetch('http://localhost:8080/api/v1/product/withImage', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                },
-                body: JSON.stringify(productData)
-            });
-    
-            if (response.ok) {
+            if (uploadResponse.status === 200) {
                 console.log('Produkt erfolgreich erstellt!');
                 toast.success("Produkt erfolgreich erstellt!");
                 setTimeout(() => {
                     navigate('/marktplatz');
                 }, 1300); 
             } else {
-                const errorData = await response.json(); 
-                console.error('Fehler beim Erstellen des Produkts:', errorData);
-                toast.error("Fehler beim Erstellen des Produkts: " + (errorData.message || errorData.error));
+                console.error('Fehler beim Erstellen des Produkts:', uploadResponse.data);
+                toast.error("Fehler beim Erstellen des Produkts: " + (uploadResponse.data.message || uploadResponse.data.error));
             }
         } catch (error) {
             toast.error("Es ist ein Fehler aufgetreten.");
             console.error('Error:', error);
         }
     };
-
     return (
         <div className="form-container">
             <form className="form" onSubmit={handleCreateProduct}>
