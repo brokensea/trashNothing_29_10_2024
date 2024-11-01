@@ -1,6 +1,6 @@
 import React from 'react';
-import { Outlet, Navigate, useLocation } from 'react-router-dom';
-
+import { Outlet, useLocation } from 'react-router-dom';
+import Navigate from '../Components/Navigate';
 import Header from '../Components/Header';
 import Footer_1 from '../Components/Footer_1';
 import Footer_2 from '../Components/Footer_2';
