@@ -97,7 +97,7 @@ export default function LoginPage() {
             
             {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
             
-            <a className="a_form" href="/registration">Don't have an account? Sign up</a>
+            <a className="a_form" href="/registration">Sie haben noch kein Konto? Sign up</a>
           </div>
           
       
