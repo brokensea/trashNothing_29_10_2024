@@ -31,11 +31,10 @@ public class ProduktControllerWithImage {
 
     @PostMapping
     public ResponseEntity<ProduktResponseDTO> createProdukt(@Valid @ModelAttribute ProduktRequestDTOWithImage request) {
-        // 查找 Benutzer
         Benutzer benutzer = benutzerRepository.findById(request.benutzerId())
                 .orElseThrow(() -> new IllegalArgumentException("User noch nicht gefunden"));
 
-        // 创建产品
+        //create Produkt
         Produkt createdProdukt = produktService.createProdukt(request, benutzer);
         ProduktResponseDTO response = ProduktMapper.toProduktResponse(createdProdukt);
 
