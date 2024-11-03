@@ -24,7 +24,7 @@ export default function Product_CreatePage() {
     const [strasse, setStrasse] = useState('');
     const [name, setName] = useState('');
     const [telefonnummer, setTelefonnummer] = useState('');
-    const [imgUrl, setImgUrl] = useState('');
+
 
     const benutzerId = localStorage.getItem('benutzerId');
     useEffect(() => {
@@ -182,7 +182,7 @@ export default function Product_CreatePage() {
                         </div>
                     )}
 
-                    <input type="hidden" value={imgUrl} />
+
                 </div>
 
                 <div className="form-group">
