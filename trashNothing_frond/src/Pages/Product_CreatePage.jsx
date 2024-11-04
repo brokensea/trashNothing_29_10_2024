@@ -9,7 +9,7 @@ const ZUSTAND_ENUM = ["NEU", "WIE_NEU", "GEBRAUCHSSPUREN"];
 const KATEGORIE_ENUM = ["KLEIDUNG", "MOEBEL", "SPIELZEUG"];
 export default function Product_CreatePage() {
     const navigate = useNavigate();
-    const [selectedImage, setSelectedImage] = useState(null);
+    
     const [previewUrl, setPreviewUrl] = useState(null);
     const [lieferung, setLieferung] = useState(false);
     const [titel, setTitel] = useState('');
@@ -24,7 +24,11 @@ export default function Product_CreatePage() {
     const [strasse, setStrasse] = useState('');
     const [name, setName] = useState('');
     const [telefonnummer, setTelefonnummer] = useState('');
+<<<<<<< HEAD
 
+=======
+    const [selectedImage, setSelectedImage] = useState(null);
+>>>>>>> 3306e74 (createPage update)
 
     const benutzerId = localStorage.getItem('benutzerId');
     useEffect(() => {
@@ -60,7 +64,6 @@ export default function Product_CreatePage() {
         const file = event.target.files[0];
         if (file) {
             setSelectedImage(file);
-
             setPreviewUrl(URL.createObjectURL(file));
         }
     };
@@ -91,7 +94,9 @@ export default function Product_CreatePage() {
         formData.append("zustand", zustand);
         formData.append("kategorie", kategorie);
         formData.append("benutzerId", parseInt(benutzerId, 10));
-
+        for (const [key, value] of formData.entries()) {
+            console.log(`${key}:`, value);
+        }
         try {
             const uploadResponse = await axios.post('http://localhost:8080/api/v1/product/withImage', formData, {
                 headers: {
@@ -111,8 +116,20 @@ export default function Product_CreatePage() {
                 toast.error("Fehler beim Erstellen des Produkts: " + (uploadResponse.data.message || uploadResponse.data.error));
             }
         } catch (error) {
-            toast.error("Es ist ein Fehler aufgetreten.");
-            console.error('Error:', error);
+            console.error('Error during product creation:', error);  // More detailed error logging
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                console.error('Response data:', error.response.data);
+                toast.error("Es ist ein Fehler aufgetreten: " + (error.response.data.message || error.response.data.error || "Unbekannter Fehler"));
+            } else if (error.request) {
+                // The request was made but no response was received
+                console.error('Request data:', error.request);
+                toast.error("Keine Antwort vom Server erhalten.");
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.error('Error message:', error.message);
+                toast.error("Fehler: " + error.message);
+            }
         }
     };
     return (
@@ -182,7 +199,11 @@ export default function Product_CreatePage() {
                         </div>
                     )}
 
+<<<<<<< HEAD
 
+=======
+                    
+>>>>>>> 3306e74 (createPage update)
                 </div>
 
                 <div className="form-group">
