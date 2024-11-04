@@ -12,6 +12,7 @@ import de.sp.trashNothing_backend.repositories.BenutzerRepository;
 import de.sp.trashNothing_backend.repositories.GekauftListRepository;
 import de.sp.trashNothing_backend.repositories.GekauftSet_ProduktRepository;
 import de.sp.trashNothing_backend.repositories.ProduktRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -65,6 +66,12 @@ public class ProduktEinkaufenService {
         gekauftSetProdukt.setProdukt(produkt);
         gekauftSet_produktRepository.save(gekauftSetProdukt);
 
+        return ProduktMapper.toProduktEinkaufenResponseDTO(produkt);
+    }
+
+    public ProduktEinkaufenResponseDTO getProduktDetailById(Long id) {
+        Produkt produkt = produktRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Produkt mit ID " + id + " wurde nicht gefunden"));
         return ProduktMapper.toProduktEinkaufenResponseDTO(produkt);
     }
 

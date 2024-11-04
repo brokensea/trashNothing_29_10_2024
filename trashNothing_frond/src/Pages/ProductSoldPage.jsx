@@ -9,7 +9,7 @@ export default function ProductSoldPage() {
     const ListeVerkaufterProdukte2 = [ListeVerkaufterProdukte]
     const mappedListeVerkaufterProdukte = ListeVerkaufterProdukte2.map
         (verkauftesProdukt => <ul>{verkauftesProdukt}</ul>)
-    const benutzerId = localStorage.getItem('benutzerId')   
+    const benutzerId = localStorage.getItem('benutzerId')
     useEffect(() => {
         const fetchSoldItems = async () => {
             try {
@@ -30,12 +30,12 @@ export default function ProductSoldPage() {
         }
     });
     return (
-        
+
         <main>
             <h1>Product sold</h1>
             <div className="listeVerkaufterProdukte">
                 <ul>{mappedListeVerkaufterProdukte}</ul>
             </div>
         </main>
-    )   
+    )
 }

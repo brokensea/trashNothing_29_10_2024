@@ -23,11 +23,6 @@ public class AuthController {
     }
 
 
-    /* @PostMapping("/signin")
-     public String signin(Authentication authentication) {
-         System.out.println(authentication.getAuthorities().toString());
-         return authentificationService.token(authentication);
-     }*/
     @PostMapping("/signin")
     public ResponseEntity<TokenResponseDto> signin(Authentication authentication) {
         TokenResponseDto responseDto = authentificationService.token(authentication);
