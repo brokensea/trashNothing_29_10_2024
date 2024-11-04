@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./css/Product_CreatePage.css";
+import iconBilderhochlade from "../assets/img/avatars_login-register/iconBilderhochlade.png";
 import axios from "axios";
 
 const ZUSTAND_ENUM = ["NEU", "WIE_NEU", "GEBRAUCHSSPUREN"];
 const KATEGORIE_ENUM = ["KLEIDUNG", "MOEBEL", "SPIELZEUG"];
+
 export default function Product_CreatePage() {
   const navigate = useNavigate();
   const [selectedImage, setSelectedImage] = useState(null);
@@ -26,6 +28,7 @@ export default function Product_CreatePage() {
   const [telefonnummer, setTelefonnummer] = useState("");
 
   const benutzerId = localStorage.getItem("benutzerId");
+
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
@@ -40,19 +43,19 @@ export default function Product_CreatePage() {
 
         if (response.ok) {
           const data = await response.json();
-
           setPlz(data.plz);
           setOrt(data.ort);
           setStrasse(data.addressStrasse);
           setName(data.name);
           setTelefonnummer(data.handynummer);
         } else {
-          console.error("Fehler beim Abrufen der Benutzerdaten.");
+          toast.error("Fehler beim Abrufen der Benutzerdaten.");
         }
       } catch (error) {
-        console.error("Es ist ein Fehler aufgetreten:", error);
+        toast.error("Es ist ein Fehler aufgetreten: " + error.message);
       }
     };
+
     if (benutzerId) {
       fetchUserDetails();
     }
@@ -62,10 +65,14 @@ export default function Product_CreatePage() {
     const file = event.target.files[0];
     if (file) {
       setSelectedImage(file);
-
       setPreviewUrl(URL.createObjectURL(file));
     }
   };
+
+  const handleImageClick = () => {
+    document.getElementById("file-input").click();
+  };
+
   const handleCreateProduct = async (event) => {
     event.preventDefault();
 
@@ -114,27 +121,22 @@ export default function Product_CreatePage() {
         }
       );
 
-      if (uploadResponse.status === 200) {
-        console.log("Produkt erfolgreich erstellt!");
+      if (uploadResponse.status === 201) {
         toast.success("Produkt erfolgreich erstellt!");
         setTimeout(() => {
           navigate("/marktplatz");
         }, 1300);
       } else {
-        console.error(
-          "Fehler beim Erstellen des Produkts:",
-          uploadResponse.data
-        );
         toast.error(
           "Fehler beim Erstellen des Produkts: " +
-            (uploadResponse.data.message || uploadResponse.data.error)
+            (uploadResponse.data.message || "Unbekannter Fehler")
         );
       }
     } catch (error) {
-      toast.error("Es ist ein Fehler aufgetreten.");
-      console.error("Error:", error);
+      toast.error("Es ist ein Fehler aufgetreten: " + error.message);
     }
   };
+
   return (
     <div className="form-container">
       <form className="form" onSubmit={handleCreateProduct}>
@@ -169,6 +171,7 @@ export default function Product_CreatePage() {
             type="text"
             value={titel}
             onChange={(e) => setTitel(e.target.value)}
+            required
           />
         </div>
         <div className="form-group">
@@ -176,7 +179,8 @@ export default function Product_CreatePage() {
           <textarea
             value={beschreibung}
             onChange={(e) => setBeschreibung(e.target.value)}
-          ></textarea>
+            required
+          />
         </div>
         <div className="form-group">
           <label>Anzahl:</label>
@@ -184,15 +188,17 @@ export default function Product_CreatePage() {
             type="number"
             value={anzahl}
             onChange={(e) => setAnzahl(e.target.value)}
+            required
           />
         </div>
         <div className="form-group">
           <label>Preis:</label>
           <div className="price-input">
             <input
-              type="text"
+              type="number"
               value={preis}
               onChange={(e) => setPreis(e.target.value)}
+              required
             />{" "}
             EUR
           </div>
@@ -207,25 +213,51 @@ export default function Product_CreatePage() {
             ))}
           </select>
         </div>
-        <div>
-          <div className="form-group">
-            <label>Bilder hochladen:</label>
-            <input type="file" accept="image/*" onChange={handleImageChange} />
-          </div>
-
-          {previewUrl && (
-            <div className="image-preview">
-              <img src={previewUrl} alt="preview" width="100" height="100" />
-            </div>
+        <div className="form-group">
+          <label>Bilder hochladen:</label>
+          <input
+            type="file"
+            id="file-input"
+            accept="image/*"
+            onChange={handleImageChange}
+            style={{ display: "none" }}
+            required
+          />
+          {previewUrl ? (
+            <img
+              src={previewUrl}
+              alt="Selected"
+              onClick={handleImageClick}
+              style={{
+                cursor: "pointer",
+                width: "200px",
+                height: "auto",
+                marginTop: "10px",
+              }}
+            />
+          ) : (
+            <img
+              src={iconBilderhochlade}
+              alt="Upload Icon"
+              onClick={handleImageClick}
+              style={{
+                cursor: "pointer",
+                width: "100px",
+                height: "auto",
+                marginTop: "10px",
+              }}
+            />
           )}
         </div>
 
         <div className="form-group">
           <label>Marke:</label>
-          <textarea
+          <input
+            type="text"
             value={marke}
             onChange={(e) => setMarke(e.target.value)}
-          ></textarea>
+            required
+          />
         </div>
         <div className="form-group">
           <label>Kategorie:</label>
