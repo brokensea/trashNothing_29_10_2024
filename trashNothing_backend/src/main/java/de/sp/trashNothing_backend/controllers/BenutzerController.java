@@ -22,8 +22,8 @@ public class BenutzerController {
     }
 
     @GetMapping("/soldItems")
-    public ResponseEntity<GetAllSoldProductsResponseDto> GetListeVerkaufterProdukte(@Valid @RequestBody GetAllSoldProductsRequestDto dto){
+    public ResponseEntity<GetAllSoldProductsResponseDto> GetListeVerkaufterProdukte(@Valid @RequestBody GetAllSoldProductsRequestDto dto) {
         return ResponseEntity.ok(benutzerService.GetListeverkaufterProdukte(dto.benutzerId()));
-
     }
+    
 }
