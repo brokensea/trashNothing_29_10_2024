@@ -7,8 +7,8 @@
     padding: 40px 20px;
     background: linear-gradient(
         to bottom,
-        rgba(236, 240, 253, 0.10) 0%,
-        rgba(236, 240, 253, 0.30) 15%,
+        rgba(236, 240, 253, 0.05) 0%,
+        rgba(236, 240, 253, 0.40) 15%,
         rgba(236, 240, 253, 0.50) 20%,
         rgba(236, 240, 253, 0.73) 30%,
         rgba(236, 240, 253, 1) 46%,
@@ -26,7 +26,7 @@
     font-size: 3.5rem;
     font-weight: bold;
     color: #333;
-    margin-bottom: 50px;
+    margin-bottom: 100px;
 }
 
 .sub_text {

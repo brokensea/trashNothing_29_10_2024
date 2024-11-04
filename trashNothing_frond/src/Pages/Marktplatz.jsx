@@ -110,7 +110,7 @@ export default function Marktplatz() {
                 <div className="search_area">
                     <input
                         type="text"
-                        placeholder="Suche nach Produkt, Kategorie..."
+                        placeholder="Suche nach Produkt..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                         className="search_input"

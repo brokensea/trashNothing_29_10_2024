@@ -17,7 +17,7 @@ export default function Header() {
             <Link to="/" className="logo">nothingtotrash</Link>
             <div className="nav-container">
                 <Link to="/marktplatz">Marktplatz</Link>
-                <Link to="/uber-uns">Über uns</Link>
+                <Link to="/aboutus">Über uns</Link>
             </div>
             <div className="right-container">
                 {!token ? (
@@ -40,9 +40,9 @@ export default function Header() {
                         </button>
                         {isDropdownOpen && (
                             <div className="dropdown-menu">
-                                <Link to="/wunschlist">Wunschliste</Link>
+                                <Link to="/wischlist">Wunschliste</Link>
                                 <Link to="/gekauflist">Gekaufte Produkte</Link>
-                                <Link to="/soldlist">Verkaufte Produkte</Link>
+                                <Link to="/soldproduct">Verkaufte Produkte</Link>
                                 <button onClick={handleLogout} className="logout-button">Abmelden</button>
                             </div>
                         )}

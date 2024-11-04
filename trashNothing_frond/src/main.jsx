@@ -12,6 +12,7 @@ import ProductDetailsPage from './Pages/ProductDetailsPage.jsx'
 import ProductSoldPage from './Pages/ProductSoldPage.jsx'
 import RegisterPage from './Pages/RegisterPage.jsx'
 import WishListPage from './Pages/WishListPage.jsx'
+import AboutUs from './Pages/AboutUs.jsx'
 import Layout from './Pages/Layout.jsx';
 
 const router = createBrowserRouter([
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: "/soldproduct",
         element: <ProductSoldPage />
+      },
+      {
+        path: "/aboutus",
+        element: <AboutUs />
       },
       {
         path: "/wischlist",
