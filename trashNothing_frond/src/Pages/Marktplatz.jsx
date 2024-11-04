@@ -78,9 +78,9 @@ export default function Marktplatz() {
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
-            setProducts(data); // 更新产品列表
+            setProducts(data); // update Produkt List
         } catch (error) {
-            console.error("Error fetching products:", error); // 错误处理
+            console.error("Error fetching products:", error); // Error Handling
         }
     };
 
