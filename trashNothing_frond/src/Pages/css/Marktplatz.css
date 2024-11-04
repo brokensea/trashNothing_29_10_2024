@@ -91,6 +91,7 @@
     list-style: none;
     padding: 0;
     margin: 0 0 20px 0;
+    
 }
 
 .category_list li,
@@ -100,6 +101,9 @@
     align-items: center;
 }
 
+.checkbox_list input[type="checkbox"] {
+    margin-right: 10px; 
+}
 
 .price_range {
     display: flex;
@@ -123,9 +127,11 @@
     border-radius: 5px;
     cursor: pointer;
     margin-top: 5px;
+    
 }
 
 .reset_button {
+    margin-left: 15px;
     background-color: #ccc;
 }
 
