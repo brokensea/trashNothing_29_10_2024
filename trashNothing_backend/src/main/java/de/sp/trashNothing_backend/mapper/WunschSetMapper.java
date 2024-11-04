@@ -15,7 +15,7 @@ public class WunschSetMapper {
                 .map(Produkt::getId)
                 .orElse(null);
         Produkt produkt = wunschSet.getWunschSetProdukte().stream()
-                .findFirst() // Предполагаем, что в WunschSet только один Produkt
+                .findFirst()
                 .map(WunschSet_Produkt::getProdukt)
                 .orElseThrow(() -> new IllegalArgumentException("Produkt nicht gefunden"));
         return new WishlistResponseDTO(

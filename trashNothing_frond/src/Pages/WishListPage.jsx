@@ -182,8 +182,8 @@ export default function WishListPage() {
 
         <div className="product_listings">
           {products.length > 0 ? (
-            products.map((product) => (
-              <div key={product.id} className="product_card">
+           products.map((product, index) => (
+            <div key={product.id || index} className="product_card">
                 <img
                   src={product.imgUrl}
                   alt={product.titel}
