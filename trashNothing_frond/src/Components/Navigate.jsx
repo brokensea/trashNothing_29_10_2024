@@ -10,8 +10,8 @@ export default function Navigate() {
                     <Link to="/marktplatz" className="hover:underline">Marktplatz</Link>
                     <Link to="/createproduct" className="hover:underline">Product Create</Link>
                     <Link to="/soldproduct" className="hover:underline">Product Sold</Link>
-                    <Link to="/detailsproduct" className="hover:underline">Wishlist</Link>
-                    <Link to="/wischlist" className="hover:underline">Product Details</Link>
+                    <Link to="/detailsproduct" className="hover:underline">Product Details</Link>
+                    <Link to="/wischlist" className="hover:underline">Wishlist</Link>
                 </nav>
             </header>
             

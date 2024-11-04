@@ -11,6 +11,7 @@ import de.sp.trashNothing_backend.repositories.WunschSetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -34,6 +35,12 @@ public class WunschSetService {
         wunschSet.setWunschSetProdukte(Set.of(new WunschSet_Produkt(wunschSet, produkt)));
 
         return wunschSetRepository.save(wunschSet);
+    }
+    public List<WunschSet> getWunschSetsByBenutzerId(Long benutzerId) {
+        return wunschSetRepository.findByBenutzerId(benutzerId);
+    }
+    public List<WunschSet> getAllWunschSet(){
+        return  wunschSetRepository.findAll();
     }
 
     public void deleteWunschSet(Long id){
