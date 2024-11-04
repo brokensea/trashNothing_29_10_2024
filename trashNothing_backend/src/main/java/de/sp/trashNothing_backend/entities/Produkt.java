@@ -1,5 +1,6 @@
 package de.sp.trashNothing_backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.sp.trashNothing_backend.entities.enumClass.Kategorie;
 import de.sp.trashNothing_backend.entities.enumClass.Zustand;
 import jakarta.persistence.*;
@@ -56,6 +57,7 @@ public class Produkt {
 
     @ManyToOne
     @JoinColumn(name = "benutzer_id")
+    @JsonIgnore
     private Benutzer benutzer;
 
     @OneToMany(mappedBy = "produkt")
@@ -90,5 +92,4 @@ public class Produkt {
         this.kategorie = kategorie;
         this.benutzer = benutzer;
     }
-
 }
