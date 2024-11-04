@@ -13,6 +13,19 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+import de.sp.trashNothing_backend.dtos.request.ProduktEinkaufenRequestDTO;
+import de.sp.trashNothing_backend.dtos.response.ProduktEinkaufenResponseDTO;
+import de.sp.trashNothing_backend.entities.enumClass.Kategorie;
+import de.sp.trashNothing_backend.services.ProduktEinkaufenService;
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/produkte")
 public class ProduktEinkaufenController {
