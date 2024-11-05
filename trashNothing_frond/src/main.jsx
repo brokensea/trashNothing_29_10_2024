@@ -12,6 +12,7 @@ import ProductDetailsPage from './Pages/ProductDetailsPage.jsx'
 import ProductSoldPage from './Pages/ProductSoldPage.jsx'
 import RegisterPage from './Pages/RegisterPage.jsx'
 import WishListPage from './Pages/WishListPage.jsx'
+import GekauftList from './Pages/Gekauftlist.jsx'
 import AboutUs from './Pages/AboutUs.jsx'
 import Layout from './Pages/Layout.jsx';
 import UpdateProductPage from './Pages/UpdateProductPage.jsx'
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: "/aboutus",
         element: <AboutUs />
+      },
+      {
+        path: "/gekauflist",
+        element: <GekauftList />
       },
       {
         path: "/wischlist",

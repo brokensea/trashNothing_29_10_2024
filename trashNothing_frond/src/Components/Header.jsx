@@ -39,7 +39,8 @@ export default function Header() {
                             Mein Konto
                         </button>
                         {isDropdownOpen && (
-                            <div className="dropdown-menu">
+                                <div className="dropdown-menu">
+                                <Link to="/createproduct">Produkt einstellen</Link>
                                 <Link to="/wischlist">Wunschliste</Link>
                                 <Link to="/gekauflist">Gekaufte Produkte</Link>
                                 <Link to="/soldproduct">Verkaufte Produkte</Link>

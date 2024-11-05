@@ -108,3 +108,9 @@ button.submit-button:hover {
 .background-decor {
     display: none;
 }
+
+.large-textarea {
+    width: 100%; 
+    height: 200px; 
+    resize: vertical; 
+}
