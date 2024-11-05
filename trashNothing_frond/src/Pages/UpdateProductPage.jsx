@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "./css/Product_CreatePage.css";
 import axios from "axios";
 
 // 状态和类别枚举
@@ -222,7 +223,7 @@ export default function UpdateProductPage() {
                 {imgUrl && (
                     <div className="form-group">
                         <label>Aktuelles Bild:</label>
-                        <img src={imgUrl} alt="Aktuelles Produkt" style={{ maxWidth: '100px' }} />
+                        <img src={imgUrl} alt="Aktuelles Produkt" style={{ maxWidth: '80%' }} />
                     </div>
                 )}
                 <button type="submit" className="submit-button">
