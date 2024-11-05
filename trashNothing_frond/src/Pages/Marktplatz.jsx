@@ -205,16 +205,21 @@ export default function Marktplatz() {
           zu reduzieren und trashnothing.
         </p>
         <div className="search_area">
-          <input
-            type="text"
-            placeholder="Suche nach Produkt..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="search_input"
-          />
-          <button className="post_button" onClick={handleSearch}>
-            Suchen
-          </button>
+          {token && ( 
+            <>
+            <input
+                type="text"
+                placeholder="Suche nach Produkt..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="search_input"
+              />
+               <button className="post_button" onClick={handleSearch}>
+                    Suchen
+                </button>
+              </>
+        )}
+          
         </div>
       </section>
 
@@ -325,6 +330,8 @@ export default function Marktplatz() {
                   </p>
                 </div>
                 <div className="product_actions">
+                  {token && ( 
+                    <>
                   <button
                     className="details_button"
                     onClick={() => navigate(`/detailsproduct/${product.id}`)}
@@ -339,8 +346,11 @@ export default function Marktplatz() {
                     ) : (
                       <span></span>
                     )}
-                  </label>
+                      </label>
+                      </>
+                    )}
                 </div>
+                  
               </div>
             ))
           ) : (
