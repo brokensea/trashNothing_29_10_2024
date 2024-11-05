@@ -152,7 +152,7 @@ if (!Array.isArray(data)) {
        
       </section>
 
-      <div className="product_listing_container">
+      {/* <div className="product_listing_container">
         <aside className="sidebar">
           <h3>Kategorien</h3>
           <div className="checkbox_list">
@@ -232,9 +232,9 @@ if (!Array.isArray(data)) {
           >
             Reset
           </button>
-        </aside>
+        </aside> */}
 
-        <div className="product_listings">
+        <div className="product_listings_wishlist">
           {products.length > 0 ? (
            products.map((product, index) => (
             <div key={product.id || index} className="product_card">
@@ -276,7 +276,7 @@ if (!Array.isArray(data)) {
             <p className="no_products_message">Keine Produkte gefunden.</p>
           )}
         </div>
-      </div>
+    
     </>
   );
 }

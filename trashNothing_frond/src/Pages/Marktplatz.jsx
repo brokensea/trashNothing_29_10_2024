@@ -2,8 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./css/Marktplatz.css";
 
-const ZUSTAND = ["NEU", "WIE_NEU", "GEBRAUCHSSPUREN"];
-const KATEGORIE = ["KLEIDUNG", "MOEBEL", "SPIELZEUG"];
+const ZUSTAND = { "Neu": "NEU", "Wie neu": "WIE_NEU", "Gebrauchsspuren": "GEBRAUCHSSPUREN" };
+const KATEGORIE = {
+  "Kleidung": "KLEIDUNG",
+  "Möbel": "MOEBEL",
+  "Spielzeug": "SPIELZEUG"
+};
+
 
 export default function Marktplatz() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -78,7 +83,7 @@ export default function Marktplatz() {
   const addToWishlist = async (productId) => {
     const benutzerId = localStorage.getItem("benutzerId");
     console.log("Attempting to add product with ID:", productId);
-    // Если товар уже в `wishlist`, выйти из функции
+    
     if (isProductInWishlist(productId)) {
       console.log("Product is already in wishlist");
       return;
@@ -101,10 +106,10 @@ export default function Marktplatz() {
         throw new Error("Error adding product to wishlist");
       }
 
-      // Получаем добавленный продукт
+     
       const newProduct = await response.json();
 
-      // Обновляем состояние wishlist, чтобы кнопка исчезла для добавленного продукта
+     
       setWishlistProducts((prev) => [...prev, newProduct]); 
     } catch (error) {
       console.error("Error adding to wishlist:", error);
@@ -215,28 +220,28 @@ export default function Marktplatz() {
         <aside className="sidebar">
           <h3>Kategorien</h3>
           <div className="checkbox_list">
-            {KATEGORIE.map((kategorie, index) => (
+            {Object.keys(KATEGORIE).map((displayName, index) => (
               <label key={index}>
                 <input
                   type="checkbox"
-                  checked={selectedKategorie.includes(kategorie)}
-                  onChange={() => handleKategorieChange(kategorie)}
+                  checked={selectedKategorie.includes(KATEGORIE[displayName])}
+                  onChange={() => handleKategorieChange(KATEGORIE[displayName])}
                 />
-                {kategorie}
+               {displayName}
               </label>
             ))}
           </div>
 
           <h3>Zustand</h3>
           <div className="checkbox_list">
-            {ZUSTAND.map((zustand, index) => (
+          {Object.keys(ZUSTAND).map((displayName, index) => (
               <label key={index}>
                 <input
                   type="checkbox"
-                  checked={selectedZustand.includes(zustand)}
-                  onChange={() => handleZustandChange(zustand)}
+                  checked={selectedZustand.includes(ZUSTAND[displayName])}
+                  onChange={() => handleZustandChange(ZUSTAND[displayName])}
                 />
-                {zustand}
+                {displayName}
               </label>
             ))}
           </div>
