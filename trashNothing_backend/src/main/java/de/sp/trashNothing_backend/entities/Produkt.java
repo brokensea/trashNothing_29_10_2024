@@ -57,7 +57,6 @@ public class Produkt {
 
     @ManyToOne
     @JoinColumn(name = "benutzer_id")
-    @JsonIgnore
     private Benutzer benutzer;
 
     @OneToMany(mappedBy = "produkt")
@@ -68,7 +67,8 @@ public class Produkt {
 
     public Produkt() {
     }
-    public Produkt(String titel, String beschreibung, int anzahl, BigDecimal preis, Zustand zustand, String marke, boolean lieferung, String imgUrl, String deleteUrl, Kategorie kategorie, Benutzer benutzer ) {
+
+    public Produkt(String titel, String beschreibung, int anzahl, BigDecimal preis, Zustand zustand, String marke, boolean lieferung, String imgUrl, String deleteUrl, Kategorie kategorie, Benutzer benutzer) {
         this.titel = titel;
         this.beschreibung = beschreibung;
         this.anzahl = anzahl;
@@ -81,7 +81,8 @@ public class Produkt {
         this.kategorie = kategorie;
         this.benutzer = benutzer;
     }
-    public Produkt(String titel, String beschreibung, int anzahl, BigDecimal preis, Zustand zustand, String marke, boolean lieferung, Kategorie kategorie, Benutzer benutzer ) {
+
+    public Produkt(String titel, String beschreibung, int anzahl, BigDecimal preis, Zustand zustand, String marke, boolean lieferung, Kategorie kategorie, Benutzer benutzer) {
         this.titel = titel;
         this.beschreibung = beschreibung;
         this.anzahl = anzahl;
