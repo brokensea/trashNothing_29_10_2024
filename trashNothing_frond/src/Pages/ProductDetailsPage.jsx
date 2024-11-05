@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
 import './css/ProductDetailsPage.css';
-
+import { useParams } from "react-router-dom";
 export default function ProductDetailsPage() {
+    const { productId } = useParams(); 
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
-    const productId = 5; // 静态ID
+    
 
     const fetchProductDetails = async () => {
         try {
             const token = localStorage.getItem('token');
             const response = await fetch(`http://localhost:8080/api/v1/produkte/${productId}`, {
                 headers: {
-                    'Authorization': 'Bearer ' + token,
+                    Authorization: "Bearer " + localStorage.getItem("token"),
                 }
             });
             if (!response.ok) {
@@ -28,7 +29,7 @@ export default function ProductDetailsPage() {
 
     useEffect(() => {
         fetchProductDetails();
-    }, []);
+    }, [productId]);
 
     if (loading) {
         return <p>Loading...</p>;
@@ -51,6 +52,7 @@ export default function ProductDetailsPage() {
     };
 
     return (
+        <section className="background_section_details">
         <div className="product-details">
             <div className="content">
                 <div className="product-image">
@@ -67,11 +69,12 @@ export default function ProductDetailsPage() {
                     <p>Marke: {product.marke}</p>
                     <p>Lieferung: {product.lieferung ? "Ja" : "Nein"}</p>
                     <p>Anzahl: {product.anzahl} stk.</p>
-                    <button onClick={handleWishlist} className="wishlist-button">Auf die Wunschliste</button>
+                    <button onClick={handleWishlist} className="wishlist-button">Auf die Wunschliste ❤️</button>
                     <h2>Produktbeschreibung</h2>
                     <p className="product-description">{product.beschreibung}</p>
                 </div>
             </div>
-        </div>
+            </div>
+            </section>
     );
 }

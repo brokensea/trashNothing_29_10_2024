@@ -37,8 +37,8 @@ export default function Marktplatz() {
   };
 
   const fetchWishlistProducts = async () => {
-      const benutzerId = localStorage.getItem("benutzerId");
-      const token = localStorage.getItem("token"); 
+    const benutzerId = localStorage.getItem("benutzerId");
+    const token = localStorage.getItem("token");
     console.log("Token:", token);
     console.log("Benutzer ID:", benutzerId);
     if (!benutzerId || !token) {
@@ -48,7 +48,7 @@ export default function Marktplatz() {
 
     try {
       const response = await fetch(
-        `http://localhost:8080/api/v1/product/getWishlist/${benutzerId}`,
+        `http://localhost:8080/api/v1/product/AddToWishlist/user/${benutzerId}`,
         {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
@@ -61,14 +61,28 @@ export default function Marktplatz() {
       }
 
       const wishlistData = await response.json();
-      setWishlistProducts(wishlistData || []);
+        setWishlistProducts(wishlistData || []);
+        console.log("Wishlist Products:", wishlistData);
+        wishlistData.forEach((product, index) => {
+            console.log(`Wishlist Product ${index + 1}:`, product);
+        });
     } catch (error) {
       console.error("Error fetching wishlist products:", error);
     }
   };
-
+  const isProductInWishlist = (productId) => {
+    const inWishlist = wishlistProducts.some((product) => product.produktId === productId);
+    console.log(`Is product ID ${productId} in wishlist?`, inWishlist);
+    return inWishlist;
+  };
   const addToWishlist = async (productId) => {
     const benutzerId = localStorage.getItem("benutzerId");
+    console.log("Attempting to add product with ID:", productId);
+    // Если товар уже в `wishlist`, выйти из функции
+    if (isProductInWishlist(productId)) {
+      console.log("Product is already in wishlist");
+      return;
+    }
 
     try {
       const response = await fetch(
@@ -76,47 +90,28 @@ export default function Marktplatz() {
         {
           method: "POST",
           headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
+            Authorization: "Bearer " + token,
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ benutzerId }),
         }
       );
 
+      if (!response.ok) {
+        throw new Error("Error adding product to wishlist");
+      }
 
-        try {
-            const response = await fetch(url, {
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                }
-            });
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const data = await response.json();
-            setProducts(data); // update Produkt List
-        } catch (error) {
-            console.error("Error fetching products:", error); // Error Handling
-        }
-    
+      // Получаем добавленный продукт
+      const newProduct = await response.json();
 
-
-      const newProduct = await (
-        await fetch(`http://localhost:8080/api/v1/produkte/${productId}`, {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"), 
-          },
-        })
-      ).json();
-
-      setWishlistProducts((prev) => [...prev, newProduct]);
+      // Обновляем состояние wishlist, чтобы кнопка исчезла для добавленного продукта
+      setWishlistProducts((prev) => [...prev, newProduct]); 
     } catch (error) {
       console.error("Error adding to wishlist:", error);
     }
   };
 
-  const isProductInWishlist = (productId) =>
-    wishlistProducts.some((product) => product.id === productId);
+ 
 
   useEffect(() => {
     fetchProducts();
@@ -190,6 +185,7 @@ export default function Marktplatz() {
     );
     setProducts(filteredProducts);
   };
+    
   return (
     <>
       <section className="background_section_m">
@@ -300,7 +296,8 @@ export default function Marktplatz() {
 
         <div className="product_listings">
           {products.length > 0 ? (
-            products.map((product) => (
+                      products.map((product) => (
+                        
               <div key={product.id} className="product_card">
                 <img
                   src={product.imgUrl}
@@ -320,17 +317,19 @@ export default function Marktplatz() {
                 <div className="product_actions">
                   <button
                     className="details_button"
-                    onClick={() => navigate("/detailsproduct")}
+                    onClick={() => navigate(`/detailsproduct/${product.id}`)} 
                   >
                     Details
                   </button>
                   <label className="wishlist_label">
-                    {!isProductInWishlist(product.id) && (
-                      <button onClick={() => addToWishlist(product.id)}>
-                        Auf WunschListe  ❤️
-                      </button>
-                    )}
-                  </label>
+    {!isProductInWishlist(product.id) ? (
+      <button onClick={() => addToWishlist(product.id)}>
+        Auf WunschListe ❤️
+      </button>
+    ) : (
+      <span></span>  
+    )}
+  </label>
                 </div>
               </div>
             ))

@@ -12,6 +12,8 @@ export default function WishListPage() {
   const [selectedKategorie, setSelectedKategorie] = useState([]);
   const [deliveryOption, setDeliveryOption] = useState(false);
   const [pickupOption, setPickupOption] = useState(false);
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
 
   const fetchProducts = async () => {
     const benutzerId = localStorage.getItem("benutzerId");
@@ -44,6 +46,27 @@ export default function WishListPage() {
     fetchProducts();
   }, []);
 
+  const removeFromWishlist = async (wunschSetId) => {
+    try {
+        const response = await fetch(`http://localhost:8080/api/v1/product/removeWishlist/${wunschSetId}`, {
+            method: 'DELETE',
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("token"),
+                
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to remove from wishlist");
+        }
+
+        console.log(`WunschSet with ID ${wunschSetId} removed from wishlist`);
+        fetchProducts();
+    } catch (error) {
+        console.error("Error removing from wishlist:", error);
+    }
+};
+
   const handleZustandChange = (zustand) => {
     setSelectedZustand((prev) =>
       prev.includes(zustand)
@@ -62,16 +85,21 @@ export default function WishListPage() {
   const handleSearch = async () => {
     let url = "http://localhost:8080/api/v1/produkte/search";
 
-    if (searchTerm && selectedKategorie.length > 0) {
-      url += `?title=${encodeURIComponent(
-        searchTerm
-      )}&kategorie=${encodeURIComponent(selectedKategorie.join(","))}`;
-    } else if (searchTerm) {
-      url += `/searchByTitle?title=${encodeURIComponent(searchTerm)}`;
-    } else if (selectedKategorie.length > 0) {
-      url += `/searchByKategorie?kategorie=${encodeURIComponent(
-        selectedKategorie.join(",")
-      )}`;
+    const terms = searchTerm.split(" ");
+    const titleParam = terms[0];
+    const kategorieParam = terms.length > 1 ? terms[1] : "";
+
+    const titleQuery = titleParam
+      ? `title=${encodeURIComponent(titleParam)}`
+      : "";
+    const kategorieQuery =
+      kategorieParam && KATEGORIE.includes(kategorieParam)
+        ? `kategorie=${encodeURIComponent(kategorieParam)}`
+        : "";
+
+    const params = [titleQuery, kategorieQuery].filter(Boolean).join("&");
+    if (params) {
+      url += `?${params}`;
     }
 
     try {
@@ -84,9 +112,9 @@ export default function WishListPage() {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
-      setProducts(data);
+      setProducts(data); // 更新产品列表
     } catch (error) {
-      console.error("Error fetching products:", error);
+      console.error("Error fetching products:", error); // 错误处理
     }
   };
 
@@ -97,12 +125,15 @@ export default function WishListPage() {
           selectedZustand.includes(product.zustand)) &&
         (selectedKategorie.length === 0 ||
           selectedKategorie.includes(product.kategorie)) &&
-        (!deliveryOption || product.lieferung) &&
-        (!pickupOption || !product.lieferung)
+        ((!deliveryOption && !pickupOption) ||
+          (deliveryOption && pickupOption) ||
+          (deliveryOption && product.lieferung) ||
+          (pickupOption && !product.lieferung)) &&
+        (minPrice === "" || product.preis >= parseFloat(minPrice)) &&
+        (maxPrice === "" || product.preis <= parseFloat(maxPrice))
     );
     setProducts(filteredProducts);
   };
-
   return (
     <>
       <section className="background_section_m">
@@ -151,24 +182,48 @@ export default function WishListPage() {
               </label>
             ))}
           </div>
-          <h3>DeliveryOptions </h3>
-          <label>
-            <input
-              type="checkbox"
-              checked={deliveryOption}
-              onChange={() => setDeliveryOption(!deliveryOption)}
-            />
-            Lieferung möglich
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              checked={pickupOption}
-              onChange={() => setPickupOption(!pickupOption)}
-            />
-            Abholung
-          </label>
-
+          <div className="checkbox_list">
+            <h3>Delivery Options</h3>
+            <label>
+              <input
+                type="checkbox"
+                checked={deliveryOption}
+                onChange={() => setDeliveryOption(!deliveryOption)}
+              />
+              Lieferung möglich
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                checked={pickupOption}
+                onChange={() => setPickupOption(!pickupOption)}
+              />
+              Abholung
+            </label>
+          </div>
+          <div className="checkbox_list,price_range">
+            <h3>Preis</h3>
+            <label>
+              Min:
+              <input
+                type="number"
+                value={minPrice}
+                onChange={(e) => setMinPrice(e.target.value)}
+                placeholder="Min Preis"
+                className="price_input"
+              />
+            </label>
+            <label>
+              Max:
+              <input
+                type="number"
+                value={maxPrice}
+                onChange={(e) => setMaxPrice(e.target.value)}
+                placeholder="Max Preis"
+                className="price_input"
+              />
+            </label>
+          </div>
           <button className="apply_button" onClick={applyFilters}>
             Anwenden
           </button>
@@ -199,11 +254,20 @@ export default function WishListPage() {
                     {product.lieferung ? "Lieferung möglich" : "Abholung"}
                   </p>
                 </div>
+                
                 <div className="product_actions">
-                  <button className="details_button">Details</button>
-                  <label className="wishlist_label">
-                    <input type="checkbox" /> Auf die Wunschliste
-                  </label>
+                  <button
+                    className="details_button"
+                    onClick={() => navigate(`/detailsproduct/${product.id}`)} 
+                  >
+                    Details
+                  </button>
+                  <button
+                        className="remove_button,wishlist_label"
+                        onClick={() => removeFromWishlist(product.wunschSetId)} 
+                          >
+                          Entfernen von WunschListe 🤍
+                          </button>
                 </div>
               </div>
             ))
