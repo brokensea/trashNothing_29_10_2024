@@ -33,6 +33,7 @@ import java.util.stream.Collectors;
 @EnableMethodSecurity
 public class SecurityConfiguration {
     private RsaKeyProperties rsaKeys;
+
     public SecurityConfiguration(RsaKeyProperties rsaKeys) {
         this.rsaKeys = rsaKeys;
     }
@@ -45,7 +46,8 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(request -> request
                         .requestMatchers(HttpMethod.POST, "/api/v1/auth/signup").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/auth/signin").permitAll()
-                        /* .requestMatchers("/api/v1/users").hasRole("Benuter")  *///fix try
+                        .requestMatchers(HttpMethod.GET, "/api/v1/produkte").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/produkte/search").permitAll()
                         .anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())))
