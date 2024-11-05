@@ -254,8 +254,14 @@ export default function WishListPage() {
                     {product.lieferung ? "Lieferung möglich" : "Abholung"}
                   </p>
                 </div>
+                
                 <div className="product_actions">
-                  <button className="details_button">Details</button>
+                  <button
+                    className="details_button"
+                    onClick={() => navigate(`/detailsproduct/${product.id}`)} 
+                  >
+                    Details
+                  </button>
                   <button
                         className="remove_button,wishlist_label"
                         onClick={() => removeFromWishlist(product.wunschSetId)} 

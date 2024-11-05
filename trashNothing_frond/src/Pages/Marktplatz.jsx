@@ -317,7 +317,7 @@ export default function Marktplatz() {
                 <div className="product_actions">
                   <button
                     className="details_button"
-                    onClick={() => navigate("/detailsproduct")}
+                    onClick={() => navigate(`/detailsproduct/${product.id}`)} 
                   >
                     Details
                   </button>
