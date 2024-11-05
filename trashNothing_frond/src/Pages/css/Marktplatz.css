@@ -148,7 +148,13 @@
     flex-direction: column;
     gap: 20px;
 }
-
+.product_listings_wishlist{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin: 90px;
+    gap: 20px;
+}
 .product_card {
     display: flex;
     align-items: center;
@@ -180,8 +186,8 @@
 }
 
 .product_title {
-    font-size: 1rem;
-    color: #555;
+    font-size: 1.3rem;
+    color: black;
 }
 
 .product_details,

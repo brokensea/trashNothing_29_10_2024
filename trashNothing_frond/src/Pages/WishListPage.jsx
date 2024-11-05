@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./css/Marktplatz.css";
-
+import { useNavigate } from "react-router-dom";
 const ZUSTAND = ["NEU", "WIE_NEU", "GEBRAUCHSSPUREN"];
 const KATEGORIE = ["KLEIDUNG", "MOEBEL", "SPIELZEUG"];
 
@@ -14,7 +14,7 @@ export default function WishListPage() {
   const [pickupOption, setPickupOption] = useState(false);
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
-
+  const navigate = useNavigate();
   const fetchProducts = async () => {
     const benutzerId = localStorage.getItem("benutzerId");
     if (!benutzerId) {
@@ -35,8 +35,17 @@ export default function WishListPage() {
       }
       const data = await response.json();
 
+if (!Array.isArray(data)) {
+    console.error("Received data is not an array:", data);
+    return;
+}
+      console.log("API response:", data);
+      data.forEach(product => {
+        console.log("Product ID:", product.produktId);
+      });
       setAllProducts(data || []);
       setProducts(data || []);
+    
     } catch (error) {
       console.error("Error fetching products:", error);
     }
@@ -61,7 +70,8 @@ export default function WishListPage() {
         }
 
         console.log(`WunschSet with ID ${wunschSetId} removed from wishlist`);
-        fetchProducts();
+      fetchProducts();
+      console.log("Product ID:", product.produktId);
     } catch (error) {
         console.error("Error removing from wishlist:", error);
     }
@@ -139,21 +149,10 @@ export default function WishListPage() {
       <section className="background_section_m">
         <h1 className="main_heading">Diese Artikel hättest du gerne</h1>
         
-        <div className="search_area">
-          <input
-            type="text"
-            placeholder="Suche nach Produkt..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="search_input"
-          />
-          <button className="post_button" onClick={handleSearch}>
-            Produkt einstellen
-          </button>
-        </div>
+       
       </section>
 
-      <div className="product_listing_container">
+      {/* <div className="product_listing_container">
         <aside className="sidebar">
           <h3>Kategorien</h3>
           <div className="checkbox_list">
@@ -233,9 +232,9 @@ export default function WishListPage() {
           >
             Reset
           </button>
-        </aside>
+        </aside> */}
 
-        <div className="product_listings">
+        <div className="product_listings_wishlist">
           {products.length > 0 ? (
            products.map((product, index) => (
             <div key={product.id || index} className="product_card">
@@ -257,8 +256,10 @@ export default function WishListPage() {
                 
                 <div className="product_actions">
                   <button
-                    className="details_button"
-                    onClick={() => navigate(`/detailsproduct/${product.id}`)} 
+                   className="details_button"
+                   
+                   onClick={() =>
+                     navigate(`/detailsproduct/${product.produktId}`)} 
                   >
                     Details
                   </button>
@@ -275,7 +276,7 @@ export default function WishListPage() {
             <p className="no_products_message">Keine Produkte gefunden.</p>
           )}
         </div>
-      </div>
+    
     </>
   );
 }

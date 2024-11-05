@@ -14,6 +14,7 @@ import RegisterPage from './Pages/RegisterPage.jsx'
 import WishListPage from './Pages/WishListPage.jsx'
 import AboutUs from './Pages/AboutUs.jsx'
 import Layout from './Pages/Layout.jsx';
+import UpdateProductPage from './Pages/UpdateProductPage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -55,7 +56,12 @@ const router = createBrowserRouter([
       {
         path: "/wischlist",
         element: <WishListPage />
-      }]
+      },
+      {
+        path: "/updateproduct/:productId",
+        element: <UpdateProductPage />
+      }
+    ]
   }
 ]);
 createRoot(document.getElementById('root')).render(

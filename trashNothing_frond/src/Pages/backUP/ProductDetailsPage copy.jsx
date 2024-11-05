@@ -10,8 +10,8 @@ export default function ProductDetailsPage() {
     const [wishlistProducts, setWishlistProducts] = useState([]);
 
     const fetchProductDetails = async () => {
-        const token = localStorage.getItem("token"); // Ensure token is defined here
         try {
+            const token = localStorage.getItem("token");
             const response = await fetch(`http://localhost:8080/api/v1/produkte/${productId}`, {
                 headers: {
                     Authorization: "Bearer " + token,
@@ -110,7 +110,7 @@ export default function ProductDetailsPage() {
 
     const handleEdit = () => {
         console.log("Bearbeiten Button clicked");
-        navigate(`/updateproduct/${productId}`); // Navigate to the update page
+        navigate(`/updateproduct/${productId}`); // 导航到更新页面
     };
 
     const handleSold = () => {
@@ -132,25 +132,17 @@ export default function ProductDetailsPage() {
                             <button onClick={handleSold} className="sold-button">Verkauft</button>
                         </div>
                     </div>
-                </div>
-                <div className="product-info">
-                    <h1>{product.titel}</h1>
-                    <p className="product-price">{product.preis.toFixed(2)} EUR</p>
-                    <p><span className="info-product-span">Zustand:</span> {product.zustand}</p>
-                    <p className="info-product-p"><span className="info-product-span">Marke:</span> {product.marke}</p>
-                    <p><span className="info-product-span">Lieferung:</span> {product.lieferung ? "Ja" : "Nein"}</p>
-                    <p><span className="info-product-span">Anzahl:</span> {product.anzahl} stk.</p>
-                    <label className="wishlist_label_details">
-                        {!isProductInWishlist(product.id) ? (
-                            <button onClick={() => addToWishlist(product.id)}>
-                                Auf WunschListe ❤️
-                            </button>
-                        ) : (
-                            <span></span>
-                        )}
-                    </label>
-                    <h2><span className="info-product-span">Produktbeschreibung</span></h2>
-                    <p className="product-description">{product.beschreibung}</p>
+                    <div className="product-info">
+                        <h1>{product.titel}</h1>
+                        <p className="product-price">{product.preis.toFixed(2)} EUR</p>
+                        <p>Zustand: {product.zustand}</p>
+                        <p>Marke: {product.marke}</p>
+                        <p>Lieferung: {product.lieferung ? "Ja" : "Nein"}</p>
+                        <p>Anzahl: {product.anzahl} stk.</p>
+                        <button onClick={handleWishlist} className="wishlist-button">Auf die Wunschliste ❤️</button>
+                        <h2>Produktbeschreibung</h2>
+                        <p className="product-description">{product.beschreibung}</p>
+                    </div>
                 </div>
             </div>
         </section>
