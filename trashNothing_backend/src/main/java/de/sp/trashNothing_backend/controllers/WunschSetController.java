@@ -15,14 +15,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/product/AddToWishlist")
+@RequestMapping("/api/v1/product")
 public class WunschSetController {
+
     @Autowired
-    WunschSetService wunschSetService;
+    private WunschSetService wunschSetService;
 
-
-    @GetMapping
-    public ResponseEntity<List<WishlistResponseDTO>> getAllWunschSet(){
+    // Endpoint to get all wishlist items for all users (already present in your code)
+    @GetMapping("/AddToWishlist")
+    public ResponseEntity<List<WishlistResponseDTO>> getAllWunschSet() {
         List<WunschSet> wunschSets = wunschSetService.getAllWunschSet();
         List<WishlistResponseDTO> response = wunschSets.stream()
                 .map(WunschSetMapper::toWishlistResponse)
@@ -30,7 +31,8 @@ public class WunschSetController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping("/user/{benutzerId}")
+    // Endpoint to get wishlist items for a specific user
+    @GetMapping("/AddToWishlist/user/{benutzerId}")
     public ResponseEntity<List<WishlistResponseDTO>> getWunschSetByUser(@PathVariable Long benutzerId) {
         List<WunschSet> wunschSets = wunschSetService.getWunschSetsByBenutzerId(benutzerId);
         List<WishlistResponseDTO> response = wunschSets.stream()
@@ -39,20 +41,32 @@ public class WunschSetController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity<WishlistResponseDTO> addToWunschSet(@RequestBody AddProductToWishlistRequestDTO request) {
-        WunschSet createdWunschSet = wunschSetService.createWunschSet(request);
+    // New endpoint for adding a product to the wishlist
+    @PostMapping("/addToWishlist/{productId}")
+    public ResponseEntity<WishlistResponseDTO> addToWishlist(@PathVariable Long productId, @RequestBody AddProductToWishlistRequestDTO request) {
+        WunschSet createdWunschSet = wunschSetService.createWunschSet(productId, request);
         WishlistResponseDTO response = WunschSetMapper.toWishlistResponse(createdWunschSet);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void>  deleteWunschSet(@PathVariable Long id) {
+    @DeleteMapping("/removeFromWishlist/{productId}")
+    public ResponseEntity<Void> removeFromWishlist(@PathVariable Long productId, @RequestHeader("benutzerId") Long benutzerId) {
         try {
-           wunschSetService.deleteWunschSet(id);
+            wunschSetService.removeFromWishlist(productId, benutzerId);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-}
+
+    @DeleteMapping("/removeWishlist/{id}")
+    public ResponseEntity<Void> deleteWunschSet(@PathVariable Long id) {
+        try {
+            wunschSetService.deleteWunschSet(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    }
