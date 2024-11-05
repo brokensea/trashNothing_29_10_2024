@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./css/Product_CreatePage.css";
+import iconBilderhochlade from "../assets/img/avatars_login-register/iconBilderhochlade.png";
 import axios from "axios";
 
 // 状态和类别枚举
@@ -158,6 +159,7 @@ export default function UpdateProductPage() {
                         value={beschreibung}
                         onChange={(e) => setBeschreibung(e.target.value)}
                         required
+                        className="large-textarea"
                     />
                 </div>
                 <div className="form-group">
@@ -218,12 +220,13 @@ export default function UpdateProductPage() {
                     <input
                         type="file"
                         onChange={(e) => setImgFile(e.target.files[0])}
+                        
                     />
                 </div>
                 {imgUrl && (
                     <div className="form-group">
                         <label>Aktuelles Bild:</label>
-                        <img src={imgUrl} alt="Aktuelles Produkt" style={{ maxWidth: '80%' }} />
+                        <img src={imgUrl} alt="Aktuelles Produkt" style={{ maxWidth: '30%' }} />
                     </div>
                 )}
                 <button type="submit" className="submit-button">
