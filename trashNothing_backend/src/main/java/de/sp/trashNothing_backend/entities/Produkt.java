@@ -1,5 +1,6 @@
 package de.sp.trashNothing_backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.sp.trashNothing_backend.entities.enumClass.Kategorie;
 import de.sp.trashNothing_backend.entities.enumClass.Zustand;
 import jakarta.persistence.*;
@@ -66,7 +67,8 @@ public class Produkt {
 
     public Produkt() {
     }
-    public Produkt(String titel, String beschreibung, int anzahl, BigDecimal preis, Zustand zustand, String marke, boolean lieferung, String imgUrl, String deleteUrl, Kategorie kategorie, Benutzer benutzer ) {
+
+    public Produkt(String titel, String beschreibung, int anzahl, BigDecimal preis, Zustand zustand, String marke, boolean lieferung, String imgUrl, String deleteUrl, Kategorie kategorie, Benutzer benutzer) {
         this.titel = titel;
         this.beschreibung = beschreibung;
         this.anzahl = anzahl;
@@ -79,7 +81,8 @@ public class Produkt {
         this.kategorie = kategorie;
         this.benutzer = benutzer;
     }
-    public Produkt(String titel, String beschreibung, int anzahl, BigDecimal preis, Zustand zustand, String marke, boolean lieferung, Kategorie kategorie, Benutzer benutzer ) {
+
+    public Produkt(String titel, String beschreibung, int anzahl, BigDecimal preis, Zustand zustand, String marke, boolean lieferung, Kategorie kategorie, Benutzer benutzer) {
         this.titel = titel;
         this.beschreibung = beschreibung;
         this.anzahl = anzahl;
@@ -90,5 +93,4 @@ public class Produkt {
         this.kategorie = kategorie;
         this.benutzer = benutzer;
     }
-
 }

@@ -14,11 +14,18 @@ public class WunschSetMapper {
                 .map(WunschSet_Produkt::getProdukt)
                 .map(Produkt::getId)
                 .orElse(null);
-
+        Produkt produkt = wunschSet.getWunschSetProdukte().stream()
+                .findFirst()
+                .map(WunschSet_Produkt::getProdukt)
+                .orElseThrow(() -> new IllegalArgumentException("Produkt nicht gefunden"));
         return new WishlistResponseDTO(
                 wunschSet.getId(),
                 wunschSet.getBenutzer().getId(),
-                produktId
+                produktId,
+                produkt.getTitel(),
+                produkt.getBeschreibung(),
+                produkt.getPreis(),
+                produkt.isLieferung()
         );
     }
 }

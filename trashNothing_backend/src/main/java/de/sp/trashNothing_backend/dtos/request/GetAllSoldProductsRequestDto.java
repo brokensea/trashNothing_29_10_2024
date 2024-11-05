@@ -1,6 +1,8 @@
 package de.sp.trashNothing_backend.dtos.request;
 
+import jakarta.validation.constraints.NotNull;
+
 public record GetAllSoldProductsRequestDto(
-        Long benutzerId
+        @NotNull Long benutzerId
 ) {
 }

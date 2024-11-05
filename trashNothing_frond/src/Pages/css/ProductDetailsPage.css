@@ -1,0 +1,87 @@
+/* Product Details Layout */
+.product-details {
+    display: flex;
+    flex-direction: column;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+.content {
+    display: flex;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+    flex: 1;
+    margin-right: 40px;
+}
+
+.product-image img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.product-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.edit-button,
+.sold-button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.edit-button {
+    background-color: #ffffff;
+    color: #6200ee;
+    border: 1px solid #6200ee;
+}
+
+.sold-button {
+    background-color: #6200ee;
+    color: #ffffff;
+}
+
+/* Product Info */
+.product-info {
+    flex: 1.5;
+    color: #010d0e;
+}
+
+.product-info h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.product-info h2 {
+    text-align: left;
+}
+
+.product-price {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.wishlist-button {
+    margin-top: 20px;
+    background: none;
+    color: #6200ee;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.product-description {
+    margin-top: 20px;
+    line-height: 1.5;
+}

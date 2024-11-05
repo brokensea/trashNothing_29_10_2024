@@ -7,8 +7,8 @@
     padding: 40px 20px;
     background: linear-gradient(
         to bottom,
-        rgba(236, 240, 253, 0.10) 0%,
-        rgba(236, 240, 253, 0.30) 15%,
+        rgba(236, 240, 253, 0.05) 0%,
+        rgba(236, 240, 253, 0.40) 15%,
         rgba(236, 240, 253, 0.50) 20%,
         rgba(236, 240, 253, 0.73) 30%,
         rgba(236, 240, 253, 1) 46%,
@@ -26,7 +26,7 @@
     font-size: 3.5rem;
     font-weight: bold;
     color: #333;
-    margin-bottom: 50px;
+    margin-bottom: 100px;
 }
 
 .sub_text {
@@ -80,7 +80,7 @@
 
 .sidebar {
     width: 250px;
-    background-color: #f9f9f9;
+    background-color: white;
     padding: 20px;
     border-radius: 8px;
     font-size: 0.9rem;
@@ -99,6 +99,7 @@
     margin: 5px 0;
     display: flex;
     align-items: center;
+    width: 250px;
 }
 
 .checkbox_list input[type="checkbox"] {
@@ -130,6 +131,7 @@
     
 }
 
+
 .reset_button {
     margin-left: 15px;
     background-color: #ccc;
@@ -158,8 +160,8 @@
 }
 
 .product_image {
-    width: 100px;
-    height: 100px;
+    width: 400px;
+    height: auto;
     object-fit: cover;
     border-radius: 5px;
 }
@@ -202,6 +204,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin: 5px 50px;
 }
 
 .details_button:hover {
@@ -214,6 +217,10 @@
     display: flex;
     align-items: center;
     gap: 5px;
+    width: 200px;
+    justify-content: center;
+    margin-left: 35px;
+
 }
 .no_products_message {
     text-align: center;

@@ -4,7 +4,7 @@ import { Link, Outlet, useNavigate } from 'react-router-dom';
 export default function HomePage() {
     return (
         <div className="homepage">
-            <section className="upperSection">
+            <section className="upper_section">
                 <article className='upper_article'>
                     <h1>Hilf mit die Umwelt zu schützen</h1>
                     <p>
