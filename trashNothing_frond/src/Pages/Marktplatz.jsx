@@ -313,8 +313,11 @@ export default function Marktplatz() {
                   <h4 className="product_price">
                     {product.preis.toFixed(2)} EUR
                   </h4>
-                  <p className="product_title">{product.titel}</p>
+                            <p className="product_title">{product.titel}</p>
+                            <p className="product_location">Zustand: {product.zustand}</p>
+                            <p className="product_location">Marke: {product.marke}</p>
                   <p className="product_details">{product.beschreibung}</p>
+                 
                   <p className="product_location">
                     {product.lieferung ? "Lieferung möglich" : "Abholung"}
                   </p>

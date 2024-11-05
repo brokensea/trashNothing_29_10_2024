@@ -192,8 +192,17 @@
 
 .product_details,
 .product_location {
-    font-size: 0.85rem;
+    font-size: 1rem;
     color: #888;
+   
+}
+.product_details{
+    font-style: italic;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.product_location {
+    font-style: bold;
 }
 
 .product_actions {
