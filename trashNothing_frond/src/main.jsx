@@ -15,7 +15,7 @@ import WishListPage from './Pages/WishListPage.jsx'
 import AboutUs from './Pages/AboutUs.jsx'
 import Layout from './Pages/Layout.jsx';
 import UpdateProductPage from './Pages/UpdateProductPage.jsx'
-import Gekauftlist from './Pages/Gekauftlist.jsx'
+import GekauftList from './Pages/Gekauftlist.jsx'
 
 const router = createBrowserRouter([
   {
@@ -64,9 +64,13 @@ const router = createBrowserRouter([
         element: <UpdateProductPage />
       },
       {
-        path: "/gekaufte",
-        element: <Gekauftlist />
-      },
+        path: "/gekauflist",
+        element: <GekauftList />
+      }
+      // {
+      //   path: "/gekaufte",
+      //   element: <Gekauftlist />
+      // },
     ]
   }
 ]);
