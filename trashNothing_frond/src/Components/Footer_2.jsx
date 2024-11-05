@@ -13,7 +13,7 @@ export default function Footer_1() {
                     <img src={wifi} alt="wifi" className='footer_icon' />
                     <img src={instagram} alt="instagram" className='footer_icon' />
                 </div>
-                <p className='copyright_footer'>COPYRIGHT nothingtotrash 2021 - TERMS & CONDITIONS  PRIVACY POLICY</p>
+                <p className='copyright_footer'>COPYRIGHT nothingtotrash 2024 - TERMS & CONDITIONS  PRIVACY POLICY</p>
             </div>
     </footer>
     )

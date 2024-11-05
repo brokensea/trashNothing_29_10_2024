@@ -12,26 +12,37 @@ export default function HomePage() {
                     </p>
                     <Link to="/marktplatz">
                             <button className='button_starteJetzt'>Starte jetzt!</button>
-                        </Link>
+                    </Link>
+                </article>
+                <article>
+                    <img className='img_upper' src="src/assets/img/homepage/main illustration.png" alt="person in field" />
                 </article>
             </section>
             
+            <h2 className='h2_eCommerce'>Lebe eCommerce mal anders</h2>
+
             <section className="Lebe_eCommerce">
-                <h2>Lebe eCommerce mal anders</h2>
                 <article className="article_left">
-                    <h3>Verkaufen statt wegwerfen</h3>
+                <img className='img_article' src="src/assets/img/homepage/1.png" alt="guy sitting at laptop" />
+                <img className='img_wierd_left' src="src/assets/img/homepage/2.png" alt="smartphone with website on screen" />
+                    <h3 className='h3_article'>Verkaufen statt wegwerfen</h3>
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus faucibus egestas neque, quis nunc in turpis cursus eget.
                     </p>
                 </article>
                 <article className="article_mid">
-                    <h3>Verschenke und Schütze</h3>
+                    <img className='img_article' src="src/assets/img/homepage/3.png" alt="chair" />
+                    <h3 className='h3_article'>Verschenke und Schütze</h3>
                     <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus faucibus egestas neque, quis nunc in turpis cursus eget.
                     </p>
                 </article>
                 <article className="article_right">
-                    <h3>Der Umwelt zuliebe</h3>
+                    <img className='img_article' src="src/assets/img/homepage/4.png" alt="forest" />
+                    <img className='img_wierd_right_top' src="src/assets/img/homepage/7.png" alt="woman sitting on rock" />
+                    <img className='img_wierd_right_mid' src="src/assets/img/homepage/6.png" alt="woman sitting on rock" />
+                    <img className='img_wierd_right_bottom' src="src/assets/img/homepage/5.png" alt="woman sitting on rock" />
+                    <h3 className='h3_article'>Der Umwelt zuliebe</h3>
                     <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus faucibus egestas neque, quis nunc in turpis cursus eget.
                     </p>
@@ -39,15 +50,16 @@ export default function HomePage() {
             </section>
 
             <section className="purple_section">
+                <img className='ellipse_klein_1' src="src/assets/img/homepage/Ellipse_klein.png" alt="" />
                 <article className="ohne_limits_purple">
-                    <h3>Ohne Limits</h3>
+                    <h3 className='h3_purple'>Ohne Limits</h3>
                     <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus faucibus egestas neque, quis nunc in turpis cursus eget.
                     </p>
                     <button className="zur_Doku">Zur Dokumentation</button>
                 </article>
                 <article className="Community_purple">
-                    <h3>Kenn deine Community</h3>
+                    <h3 className='h3_purple'>Kenn deine Community</h3>
                     <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus faucibus egestas neque, quis nunc in turpis cursus eget.
                     </p>
