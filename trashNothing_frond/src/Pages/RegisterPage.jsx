@@ -76,7 +76,7 @@ export default function RegisterPage() {
 
   return (
     <section className="background_section">
-      <h1 className="main_heading">Registriere Dich & nimm Teil</h1>
+      <h1 className="main_heading_login">Registriere Dich & nimm Teil</h1>
 
       <div className="login_form">
         <h2 className="login_h">Mit Email anmelden</h2>
