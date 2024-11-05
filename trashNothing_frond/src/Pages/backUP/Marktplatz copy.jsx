@@ -25,13 +25,11 @@ export default function Marktplatz() {
   const token = localStorage.getItem("token");
   const fetchProducts = async () => {
     try {
-      const headers = {};
-      const token = localStorage.getItem("token");
-      if (token) {
-        headers["Authorization"] = "Bearer " + token;
-      }
-
-      const response = await fetch("http://localhost:8080/api/v1/produkte", { headers });
+      const response = await fetch("http://localhost:8080/api/v1/produkte", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -68,11 +66,11 @@ export default function Marktplatz() {
       }
 
       const wishlistData = await response.json();
-      setWishlistProducts(wishlistData || []);
-      console.log("Wishlist Products:", wishlistData);
-      wishlistData.forEach((product, index) => {
-        console.log(`Wishlist Product ${index + 1}:`, product);
-      });
+        setWishlistProducts(wishlistData || []);
+        console.log("Wishlist Products:", wishlistData);
+        wishlistData.forEach((product, index) => {
+            console.log(`Wishlist Product ${index + 1}:`, product);
+        });
     } catch (error) {
       console.error("Error fetching wishlist products:", error);
     }
@@ -85,7 +83,7 @@ export default function Marktplatz() {
   const addToWishlist = async (productId) => {
     const benutzerId = localStorage.getItem("benutzerId");
     console.log("Attempting to add product with ID:", productId);
-
+    
     if (isProductInWishlist(productId)) {
       console.log("Product is already in wishlist");
       return;
@@ -108,17 +106,17 @@ export default function Marktplatz() {
         throw new Error("Error adding product to wishlist");
       }
 
-
+     
       const newProduct = await response.json();
 
-
-      setWishlistProducts((prev) => [...prev, newProduct]);
+     
+      setWishlistProducts((prev) => [...prev, newProduct]); 
     } catch (error) {
       console.error("Error adding to wishlist:", error);
     }
   };
 
-
+ 
 
   useEffect(() => {
     fetchProducts();
@@ -192,7 +190,7 @@ export default function Marktplatz() {
     );
     setProducts(filteredProducts);
   };
-
+    
   return (
     <>
       <section className="background_section_m">
@@ -205,21 +203,16 @@ export default function Marktplatz() {
           zu reduzieren und trashnothing.
         </p>
         <div className="search_area">
-          {token && ( 
-            <>
-            <input
-                type="text"
-                placeholder="Suche nach Produkt..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="search_input"
-              />
-               <button className="post_button" onClick={handleSearch}>
-                    Suchen
-                </button>
-              </>
-        )}
-          
+          <input
+            type="text"
+            placeholder="Suche nach Produkt..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="search_input"
+          />
+          <button className="post_button" onClick={handleSearch}>
+            Suchen
+          </button>
         </div>
       </section>
 
@@ -234,14 +227,14 @@ export default function Marktplatz() {
                   checked={selectedKategorie.includes(KATEGORIE[displayName])}
                   onChange={() => handleKategorieChange(KATEGORIE[displayName])}
                 />
-                {displayName}
+               {displayName}
               </label>
             ))}
           </div>
 
           <h3>Zustand</h3>
           <div className="checkbox_list">
-            {Object.keys(ZUSTAND).map((displayName, index) => (
+          {Object.keys(ZUSTAND).map((displayName, index) => (
               <label key={index}>
                 <input
                   type="checkbox"
@@ -308,8 +301,8 @@ export default function Marktplatz() {
 
         <div className="product_listings">
           {products.length > 0 ? (
-            products.map((product) => (
-
+                      products.map((product) => (
+                        
               <div key={product.id} className="product_card">
                 <img
                   src={product.imgUrl}
@@ -330,27 +323,22 @@ export default function Marktplatz() {
                   </p>
                 </div>
                 <div className="product_actions">
-                  {token && ( 
-                    <>
                   <button
                     className="details_button"
-                    onClick={() => navigate(`/detailsproduct/${product.id}`)}
+                    onClick={() => navigate(`/detailsproduct/${product.id}`)} 
                   >
                     Details
                   </button>
                   <label className="wishlist_label">
-                    {!isProductInWishlist(product.id) ? (
-                      <button onClick={() => addToWishlist(product.id)}>
-                        Auf WunschListe ❤️
-                      </button>
-                    ) : (
-                      <span></span>
-                    )}
-                      </label>
-                      </>
-                    )}
+    {!isProductInWishlist(product.id) ? (
+      <button onClick={() => addToWishlist(product.id)}>
+        Auf WunschListe ❤️
+      </button>
+    ) : (
+      <span></span>  
+    )}
+  </label>
                 </div>
-                  
               </div>
             ))
           ) : (

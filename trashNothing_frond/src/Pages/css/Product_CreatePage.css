@@ -14,7 +14,10 @@
     margin-top: 35px;
 }
 
-
+/* h2 {
+    text-align: center;
+    color: #5a5aad;
+} */
 
 .form-group {
     margin-bottom: 16px;
@@ -107,10 +110,4 @@ button.submit-button:hover {
 
 .background-decor {
     display: none;
-}
-
-.large-textarea {
-    width: 100%; 
-    height: 200px; 
-    resize: vertical; 
 }
