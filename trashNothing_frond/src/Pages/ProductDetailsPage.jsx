@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import './css/ProductDetailsPage.css';
 import { useParams, useNavigate } from "react-router-dom";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function ProductDetailsPage() {
     const { productId } = useParams();
     const navigate = useNavigate(); 
@@ -28,6 +29,34 @@ export default function ProductDetailsPage() {
             console.error("Error fetching product details:", error);
         } finally {
             setLoading(false);
+        }
+    };
+    const addToShoppingList = async (productId) => {
+        const benutzerId = localStorage.getItem("benutzerId");
+        const token = localStorage.getItem("token");
+    
+        try {
+            const response = await fetch('http://localhost:8080/api/v1/produkte/addToShoppinglist', {
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + token,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ benutzerId, produktId: productId }), 
+            });
+    
+            if (!response.ok) {
+                throw new Error("Error adding product to shopping list");
+            }
+    
+            const result = await response.json();
+            console.log("Product added to shopping list:", result);
+            toast.success("Product added to shopping list");
+        setTimeout(() => {
+          navigate("/marktplatz");
+        }, 2500);
+        } catch (error) {
+            console.error("Error adding to shopping list:", error);
         }
     };
 
@@ -118,7 +147,10 @@ export default function ProductDetailsPage() {
     const handleSold = () => {
         console.log("Verkauft Button clicked");
     };
-    const handlePurchase = () =>  navigate(`/gekauflist`);
+    const handlePurchase = () => {
+        addToShoppingList(product.id); 
+
+    };
     const handleWishlist = () => {
         console.log("Auf die Wunschliste Button clicked");
     };
@@ -165,6 +197,7 @@ export default function ProductDetailsPage() {
                     <p className="product-description">{product.beschreibung}</p>
                 </div>
             </div>
+            <ToastContainer />
         </section>
     );
 }
