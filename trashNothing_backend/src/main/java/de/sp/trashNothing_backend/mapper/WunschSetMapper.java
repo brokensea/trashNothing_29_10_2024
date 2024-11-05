@@ -24,8 +24,10 @@ public class WunschSetMapper {
                 produktId,
                 produkt.getTitel(),
                 produkt.getBeschreibung(),
+                produkt.getImgUrl(),
                 produkt.getPreis(),
                 produkt.isLieferung()
+
         );
     }
 }

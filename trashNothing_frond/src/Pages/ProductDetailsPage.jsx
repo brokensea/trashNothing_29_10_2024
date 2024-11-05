@@ -28,7 +28,12 @@ export default function ProductDetailsPage() {
     };
 
     useEffect(() => {
-        fetchProductDetails();
+        console.log("Product ID:", productId); // Log product ID
+        if (productId) {
+            fetchProductDetails();
+        } else {
+            console.error("Invalid product ID");
+        }
     }, [productId]);
 
     if (loading) {
