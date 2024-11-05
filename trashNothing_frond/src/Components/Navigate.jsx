@@ -12,7 +12,7 @@ export default function Navigate() {
                     <Link to="/soldproduct" className="hover:underline">Product Sold</Link>
                     <Link to="/detailsproduct" className="hover:underline">Product Details</Link>
                     <Link to="/wischlist" className="hover:underline">Wishlist</Link>
-                    <Link to="/wischlist" className="hover:underline">Wishlist</Link>
+                    <Link to="/gekaufte" className="hover:underline">Gekauftlist</Link>
                 </nav>
             </header>
 

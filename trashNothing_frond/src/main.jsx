@@ -12,10 +12,10 @@ import ProductDetailsPage from './Pages/ProductDetailsPage.jsx'
 import ProductSoldPage from './Pages/ProductSoldPage.jsx'
 import RegisterPage from './Pages/RegisterPage.jsx'
 import WishListPage from './Pages/WishListPage.jsx'
-import GekauftList from './Pages/Gekauftlist.jsx'
 import AboutUs from './Pages/AboutUs.jsx'
 import Layout from './Pages/Layout.jsx';
 import UpdateProductPage from './Pages/UpdateProductPage.jsx'
+import Gekauftlist from './Pages/Gekauftlist.jsx'
 
 const router = createBrowserRouter([
   {
@@ -54,10 +54,7 @@ const router = createBrowserRouter([
         path: "/aboutus",
         element: <AboutUs />
       },
-      {
-        path: "/gekauflist",
-        element: <GekauftList />
-      },
+
       {
         path: "/wischlist",
         element: <WishListPage />
@@ -65,7 +62,11 @@ const router = createBrowserRouter([
       {
         path: "/updateproduct/:productId",
         element: <UpdateProductPage />
-      }
+      },
+      {
+        path: "/gekaufte",
+        element: <Gekauftlist />
+      },
     ]
   }
 ]);
