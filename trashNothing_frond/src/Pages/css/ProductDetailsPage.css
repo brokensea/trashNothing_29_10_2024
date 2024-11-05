@@ -1,10 +1,10 @@
 /* Product Details Layout */
 .product-details {
     display: flex;
-    flex-direction: column;
     max-width: 90%;
     margin: 0 auto;
-    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .background_section_details{
@@ -28,12 +28,14 @@
 .content {
     display: flex;
     padding: 40px;
-    align-items: flex-start
+    align-items: flex-start;
+    gap: 40px; 
+   
 }
 
 .product-image {
     flex: 1;
-    margin-right: 40px;
+    max-width: 600px;
 }
 
 .product-image img {
@@ -46,6 +48,7 @@
     justify-content: space-between;
     margin-top: 20px;
     align-items: stretch;
+    gap: 10px; 
 }
 
 .edit-button,
@@ -73,8 +76,10 @@
 
 /* Product Info */
 .product-info {
+    margin-top: 40px;
     flex: 1.5;
     color: #010d0e;
+
 }
 
 .product-info h1 {
@@ -124,4 +129,9 @@
     
     
 
+}
+.info-product-span{
+    color: black;
+    font-size: 1rem;
+    font-weight: bold;
 }

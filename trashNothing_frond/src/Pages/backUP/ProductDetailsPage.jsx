@@ -70,12 +70,20 @@ export default function ProductDetailsPage() {
                 <div className="product-info">
                     <h1>{product.titel}</h1>
                     <p className="product-price">{product.preis.toFixed(2)} EUR</p>
-                    <p>Zustand: {product.zustand}</p>
-                    <p>Marke: {product.marke}</p>
-                    <p>Lieferung: {product.lieferung ? "Ja" : "Nein"}</p>
-                    <p>Anzahl: {product.anzahl} stk.</p>
-                    <button onClick={handleWishlist} className="wishlist-button">Auf die Wunschliste ❤️</button>
-                    <h2>Produktbeschreibung</h2>
+                    <p><span className="info-product-span">Zustand:</span> {product.zustand}</p>
+                    <p className="info-product-p"><span className="info-product-span">Marke:</span> {product.marke}</p>
+                    <p><span className="info-product-span">Lieferung:</span> {product.lieferung ? "Ja" : "Nein"}</p>
+                    <p><span className="info-product-span">Anzahl:</span> {product.anzahl} stk.</p>
+                    <label className="wishlist_label_details">
+    {!isProductInWishlist(product.id) ? (
+      <button onClick={() => addToWishlist(product.id)}>
+        Auf WunschListe ❤️
+      </button>
+    ) : (
+      <span></span>  
+    )}
+  </label>
+                    <h2><span className="info-product-span">Produktbeschreibung</span></h2>
                     <p className="product-description">{product.beschreibung}</p>
                 </div>
             </div>
