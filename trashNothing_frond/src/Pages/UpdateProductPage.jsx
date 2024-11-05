@@ -44,8 +44,8 @@ export default function UpdateProductPage() {
                     setZustand(data.zustand);
                     setMarke(data.marke);
                     setKategorie(data.kategorie);
-                    setBenutzerId(data.benutzerId); // 设置用户 ID
-                    setImgUrl(data.imgUrl); // 设置默认图像 URL
+                    setBenutzerId(data.benutzerId); //  ID
+                    setImgUrl(data.imgUrl); //  URL
                 } else {
                     toast.error("Fehler beim Abrufen der Produktdaten.");
                 }
@@ -78,12 +78,12 @@ export default function UpdateProductPage() {
                 zustand,
                 kategorie,
                 marke,
-                benutzerId: benutzerId, // 使用提取的用户 ID
-                imgUrl: imgUrl || "dummy", // 如果 imgUrl 为空，填充为 "dummy"
-                deleteUrl: imgUrl ? "" : "dummy" // 如果 imgUrl 存在，deleteUrl 为空；否则填充为 "dummy"
+                benutzerId: benutzerId, // Benutzer ID
+                imgUrl: imgUrl || "dummy", //  imgUrl  "dummy"
+                deleteUrl: imgUrl ? "" : "dummy" //  imgUrl，deleteUrl "dummy"
             };
 
-            // 如果 imgFile 为空，使用旧的图像；如果有新图像，添加到请求中
+            //  imgFile
             const formData = new FormData();
             for (const key in updatedProduct) {
                 formData.append(key, updatedProduct[key]);
