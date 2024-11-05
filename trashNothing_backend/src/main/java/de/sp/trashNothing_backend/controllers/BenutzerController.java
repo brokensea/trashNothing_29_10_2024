@@ -30,8 +30,13 @@ public class BenutzerController {
 
     }
 
+    @GetMapping("/allSoldItems")
+    public ResponseEntity<List<ProduktEinkaufenResponseDTO>> getAllVerkauftSetProdukte() {
+        return ResponseEntity.ok(benutzerService.getAllVerkauftSetProdukte());
+    }
+
     @PostMapping("/sellItem")
-    public ResponseEntity<ProduktVerkauftResponseDto> produktVerkaufen(@Valid @RequestBody ProduktVerkauftRequestDto dto) {
+    public ResponseEntity<ProduktEinkaufenResponseDTO> produktVerkaufen(@Valid @RequestBody ProduktVerkauftRequestDto dto) {
         return ResponseEntity.ok(benutzerService.produktVerkauft(dto));
     }
 }

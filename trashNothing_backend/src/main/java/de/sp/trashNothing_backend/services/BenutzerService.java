@@ -51,10 +51,54 @@ public class BenutzerService {
     }
 
 
-    public ProduktVerkauftResponseDto produktVerkauft(ProduktVerkauftRequestDto dto) {
-        Benutzer benutzer = benutzerRepository.findById(dto.benutzerId()).orElseThrow(() -> new RuntimeException("Kein benutzer mit dieser ID vorhanden"));
-        Produkt verkauftesProdukt = produktRepository.findById(dto.produktId()).orElseThrow(() -> new RuntimeException("Kein PRodukt mit dieser Id gefunden"));
+    public ProduktEinkaufenResponseDTO produktVerkauft(ProduktVerkauftRequestDto dto) {
+        Benutzer benutzer = benutzerRepository.findById(dto.benutzerId())
+                .orElseThrow(() -> new RuntimeException("Kein Benutzer mit dieser ID vorhanden"));
+
+        Produkt verkauftesProdukt = produktRepository.findById(dto.produktId())
+                .orElseThrow(() -> new RuntimeException("Kein Produkt mit dieser ID gefunden"));
+
+        // add Produkt zu Benutzer verkauftSet
         benutzer.getVerkaufSet().add(verkauftesProdukt);
-        return new ProduktVerkauftResponseDto(dto.benutzerId(), dto.produktId());
+
+        benutzerRepository.save(benutzer);
+
+        return new ProduktEinkaufenResponseDTO(
+                verkauftesProdukt.getId(),
+                verkauftesProdukt.getTitel(),
+                verkauftesProdukt.getBeschreibung(),
+                verkauftesProdukt.getAnzahl(),
+                verkauftesProdukt.getPreis(),
+                verkauftesProdukt.getZustand(),
+                verkauftesProdukt.getMarke(),
+                verkauftesProdukt.isLieferung(),
+                verkauftesProdukt.getImgUrl(),
+                verkauftesProdukt.getDeleteUrl(),
+                verkauftesProdukt.getKategorie(),
+                benutzer.getId()
+        );
+    }
+
+    public List<ProduktEinkaufenResponseDTO> getAllVerkauftSetProdukte() {
+        List<Benutzer> benutzerList = benutzerRepository.findAll();
+
+        return benutzerList.stream()
+                .flatMap(benutzer -> benutzer.getVerkaufSet().stream()
+                        .map(produkt -> new ProduktEinkaufenResponseDTO(
+                                produkt.getId(),
+                                produkt.getTitel(),
+                                produkt.getBeschreibung(),
+                                produkt.getAnzahl(),
+                                produkt.getPreis(),
+                                produkt.getZustand(),
+                                produkt.getMarke(),
+                                produkt.isLieferung(),
+                                produkt.getImgUrl(),
+                                produkt.getDeleteUrl(),
+                                produkt.getKategorie(),
+                                benutzer.getId()  // 添加所属用户ID
+                        ))
+                )
+                .collect(Collectors.toList());
     }
 }

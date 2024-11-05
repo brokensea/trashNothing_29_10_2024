@@ -12,10 +12,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @Setter
@@ -53,7 +50,8 @@ public class Benutzer implements UserDetails {
     private String handynummer;
 
     @OneToMany(mappedBy = "benutzer") // muss überlegen ob auch cascade
-    private Set<Produkt> verkaufSet;
+    private Set<Produkt> verkaufSet = new HashSet<>();
+    ;
 
     @OneToMany(mappedBy = "benutzer", cascade = CascadeType.ALL)
     private Set<WunschSet> wunschSet;
