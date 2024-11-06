@@ -50,20 +50,25 @@ export default function HomePage() {
             </section>
 
             <section className="purple_section">
-                <img className='ellipse_klein_1' src="src/assets/img/homepage/Ellipse_klein.png" alt="" />
                 <article className="ohne_limits_purple">
-                    <h3 className='h3_purple'>Ohne Limits</h3>
-                    <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus faucibus egestas neque, quis nunc in turpis cursus eget.
-                    </p>
-                    <button className="zur_Doku">Zur Dokumentation</button>
+                    <img className='purple_img1' src="src/assets/img/homepage/2girlsAtMac.png" alt="2 Girls with Mac" />
+                    <div className='div_purple1'>
+                        <h3 className='h3_purple'>Ohne Limits</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus faucibus egestas neque, quis nunc in turpis cursus eget.
+                        </p>
+                        <button className="button_zurDoku">Zur Dokumentation</button>
+                    </div>
                 </article>
                 <article className="Community_purple">
-                    <h3 className='h3_purple'>Kenn deine Community</h3>
-                    <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus faucibus egestas neque, quis nunc in turpis cursus eget.
-                    </p>
-                    <button className="zur_Doku">Zur Dokumentation</button>
+                    <div className='div_purple2'>
+                        <h3 className='h3_purple'>Kenn deine Community</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus faucibus egestas neque, quis nunc in turpis cursus eget.
+                        </p>
+                        <button className="button_zurDoku">Zur Dokumentation</button>
+                    </div>
+                    <img className='purple_img2' src="src/assets/img/homepage/dudeAtWhiteboard.png" alt="Guy at Whiteboard" />
                 </article>
             </section>
 
@@ -72,6 +77,7 @@ export default function HomePage() {
                 <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus faucibus egestas neque, quis nunc in turpis cursus eget.
                 </p>
+                <img className='img_unten' src="src/assets/img/homepage/gruppenbild_unten.png" alt="gruppenbild" />
             </section>
         </div>
     );
