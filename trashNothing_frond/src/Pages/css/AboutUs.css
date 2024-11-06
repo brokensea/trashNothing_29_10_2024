@@ -3,6 +3,10 @@
     padding: 20px;
   }
   
+  .about-us h2{
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
   .photo-container {
     display: flex;
     justify-content: center;
