@@ -9,7 +9,8 @@
 
 .background_section_details{
     
-   
+   display: flex;
+   justify-content: center;
     background: linear-gradient(
         to bottom,
         rgba(236, 240, 253, 0.05) 0%,
