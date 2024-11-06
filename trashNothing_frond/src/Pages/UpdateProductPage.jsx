@@ -3,16 +3,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./css/Product_CreatePage.css";
-import iconBilderhochlade from "../assets/img/avatars_login-register/iconBilderhochlade.png";
 import axios from "axios";
 
-// 状态和类别枚举
+
 const ZUSTAND_ENUM = ["NEU", "WIE_NEU", "GEBRAUCHSSPUREN"];
 const KATEGORIE_ENUM = ["KLEIDUNG", "MOEBEL", "SPIELZEUG"];
 
 export default function UpdateProductPage() {
     const navigate = useNavigate();
-    const { productId } = useParams(); // 从 URL 中获取产品 ID
+    const { productId } = useParams(); // ID
     const [lieferung, setLieferung] = useState(false);
     const [titel, setTitel] = useState("");
     const [beschreibung, setBeschreibung] = useState("");
@@ -21,11 +20,11 @@ export default function UpdateProductPage() {
     const [zustand, setZustand] = useState(ZUSTAND_ENUM[0]);
     const [marke, setMarke] = useState("");
     const [kategorie, setKategorie] = useState(KATEGORIE_ENUM[0]);
-    const [imgFile, setImgFile] = useState(null); // 用于存储图像文件
-    const [benutzerId, setBenutzerId] = useState(null); // 用户 ID
-    const [imgUrl, setImgUrl] = useState(""); // 默认图像 URL
+    const [imgFile, setImgFile] = useState(null); // 
+    const [benutzerId, setBenutzerId] = useState(null); //  ID
+    const [imgUrl, setImgUrl] = useState(""); //  URL
 
-    // 加载产品详情
+
     useEffect(() => {
         const fetchProductDetails = async () => {
             try {
@@ -159,7 +158,6 @@ export default function UpdateProductPage() {
                         value={beschreibung}
                         onChange={(e) => setBeschreibung(e.target.value)}
                         required
-                        className="large-textarea"
                     />
                 </div>
                 <div className="form-group">
@@ -220,7 +218,6 @@ export default function UpdateProductPage() {
                     <input
                         type="file"
                         onChange={(e) => setImgFile(e.target.files[0])}
-                        
                     />
                 </div>
                 {imgUrl && (
@@ -230,7 +227,7 @@ export default function UpdateProductPage() {
                     </div>
                 )}
                 <button type="submit" className="submit-button">
-                    Produkt aktualisieren
+                    aktualisieren
                 </button>
                 <ToastContainer />
             </form>

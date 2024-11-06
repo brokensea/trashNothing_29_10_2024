@@ -7,30 +7,29 @@
     justify-content: space-between;
 }
 
-.background_section_details{
-    
-   
-    background: linear-gradient(
-        to bottom,
-        rgba(236, 240, 253, 0.05) 0%,
-        rgba(236, 240, 253, 0.40) 15%,
-        rgba(236, 240, 253, 0.50) 20%,
-        rgba(236, 240, 253, 0.73) 30%,
-        rgba(236, 240, 253, 1) 46%,
-        rgba(236, 240, 253, 0.83) 64%,
-        rgba(236, 240, 253, 0.73) 84%,
-        rgba(236, 240, 253, 0.43) 90%,
-        rgba(236, 240, 253, 0.23) 95%,
-        rgba(236, 240, 253, 0) 100%
-    );
+.background_section_details {
+
+
+    background: linear-gradient(to bottom,
+            rgba(236, 240, 253, 0.05) 0%,
+            rgba(236, 240, 253, 0.40) 15%,
+            rgba(236, 240, 253, 0.50) 20%,
+            rgba(236, 240, 253, 0.73) 30%,
+            rgba(236, 240, 253, 1) 46%,
+            rgba(236, 240, 253, 0.83) 64%,
+            rgba(236, 240, 253, 0.73) 84%,
+            rgba(236, 240, 253, 0.43) 90%,
+            rgba(236, 240, 253, 0.23) 95%,
+            rgba(236, 240, 253, 0) 100%);
     color: #333;
 }
+
 .content {
     display: flex;
     padding: 40px;
     align-items: flex-start;
-    gap: 40px; 
-   
+    gap: 40px;
+
 }
 
 .product-image {
@@ -48,7 +47,7 @@
     justify-content: space-between;
     margin-top: 20px;
     align-items: stretch;
-    gap: 10px; 
+    gap: 10px;
 }
 
 .edit-button,
@@ -108,29 +107,32 @@
     cursor: pointer;
     font-size: 1rem;
 }
-.info-product-span{
+
+.info-product-span {
     color: black;
     font-size: 1rem;
     font-weight: bold;
 }
 
 .product-description {
-   
+
     line-height: 1.5;
     color: #010d0e;
 }
+
 .wishlist_label_details {
     font-size: 0.85rem;
     color: #888;
     display: flex;
     align-items: center;
     margin-top: 15px;
-  
-    
-    
+
+
+
 
 }
-.info-product-span{
+
+.info-product-span {
     color: black;
     font-size: 1rem;
     font-weight: bold;
