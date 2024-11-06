@@ -43,7 +43,7 @@ export default function Header() {
                                 <Link to="/createproduct">Produkt einstellen</Link>
                                 <Link to="/wischlist">Wunschliste</Link>
                                 <Link to="/gekauflist">Gekaufte Produkte</Link>
-                                <Link to="/soldproduct">Verkaufte Produkte</Link>
+                                {/* <Link to="/soldproduct">Verkaufte Produkte</Link> */}
                                 <button onClick={handleLogout} className="logout-button">Abmelden</button>
                             </div>
                         )}
