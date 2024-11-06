@@ -12,7 +12,7 @@ const Layout = () => {
     const token = localStorage.getItem('token');
     return (
         <div>
-            <Navigate />
+            {/* <Navigate /> */}
             <Header />
             <main>
             
