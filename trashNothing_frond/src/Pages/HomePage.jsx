@@ -57,7 +57,9 @@ export default function HomePage() {
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus faucibus egestas neque, quis nunc in turpis cursus eget.
                         </p>
-                        <button className="button_zurDoku">Zur Dokumentation</button>
+                        <Link to="/registration">
+                            <button className='button_zurDoku'>Registriere dich jetzt!</button>
+                    </Link>
                     </div>
                 </article>
                 <article className="Community_purple">
@@ -66,7 +68,9 @@ export default function HomePage() {
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus faucibus egestas neque, quis nunc in turpis cursus eget.
                         </p>
-                        <button className="button_zurDoku">Zur Dokumentation</button>
+                        <Link to="/login">
+                            <button className='button_zurDoku'>Melde dich jetzt an!</button>
+                    </Link>
                     </div>
                     <img className='purple_img2' src="src/assets/img/homepage/dudeAtWhiteboard.png" alt="Guy at Whiteboard" />
                 </article>
