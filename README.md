@@ -1,18 +1,18 @@
 English Version
-markdown
 
 # TrashNoting
 
 TrashNoting is a secondhand goods trading platform based on Spring Boot and a front-end framework, allowing users to post, buy, and manage secondhand items. The project includes features such as user authentication, product posting, shopping lists, and wishlists.
 
 ## Table of Contents
+
 ```plaintext
 project-root/
 ├── backend/
 └── frontend/
 Tech Stack
 Backend: Spring Boot, Spring Security, JPA, Hibernate, Postgresql
-Frontend: Javascript React HTML CSS 
+Frontend: Javascript React HTML CSS
 Backend
 The backend API primarily provides functionalities for user authentication, product management, and user data management.
 
@@ -98,7 +98,7 @@ Deutsch:
 
 Technologiestack
 Backend: Spring Boot, Spring Security, JPA, Hibernate, Postgresql
-Frontend: Frontend: Javascript React HTML CSS 
+Frontend: Frontend: Javascript React HTML CSS
 Backend
 Das Backend-API bietet hauptsächlich Funktionen zur Benutzer-Authentifizierung, Produktverwaltung und Benutzerdatenverwaltung.
 
@@ -188,3 +188,4 @@ Lizenz
 Dieses Projekt steht unter der MIT-Lizenz.
 
 git@github.com:brokensea/trashNothing_29_10_2024.git
+```
