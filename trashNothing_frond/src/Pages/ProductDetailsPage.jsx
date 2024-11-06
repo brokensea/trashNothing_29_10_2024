@@ -169,7 +169,7 @@ export default function ProductDetailsPage() {
                         {isOwner ? (
                                 <>
                                     <button onClick={handleEdit} className="edit-button">Bearbeiten</button>
-                                    <button onClick={handleSold} className="sold-button">Verkauft</button>
+                                    {/* <button onClick={handleSold} className="sold-button">Verkauft</button> */}
                                 </>
                             ) : (
                                 <button onClick={handlePurchase} className="sold-button">Kaufen</button>
